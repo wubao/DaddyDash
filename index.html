@@ -1,0 +1,2978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Lance's Planetary Adventure</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Explore the universe in this physics-based platformer with realistic planetary gravity!">
+    <meta name="theme-color" content="#1a1a2e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Space Explorer">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkxhbmNlJ3MgUGxhbmV0YXJ5IEFkdmVudHVyZSIsCiAgInNob3J0X25hbWUiOiAiU3BhY2UgRXhwbG9yZXIiLAogICJkZXNjcmlwdGlvbiI6ICJFeHBsb3JlIHRoZSB1bml2ZXJzZSBpbiB0aGlzIHBoeXNpY3MtYmFzZWQgcGxhdGZvcm1lciEiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzFhMWEyZSIsCiAgInRoZW1lX2NvbG9yIjogIiMxYTFhMmUiLAogICJvcmllbnRhdGlvbiI6ICJwb3J0cmFpdC1wcmltYXJ5IiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUFIZ0FBQUI0Q0FZQUFBQ3luZDRrQUFBQUVrbEVRVlI0bk8zYU1RNENNUXdGMFVyOGZRU3JMM0RBaUR5eGYzdWZacVV0SCtEZWl4Yzgvb05iZWJjY3Y4ZUIrREZRTFR5Z085NzMxVVpoWGh1RzFhT2hjbzhXdkhtRVlwdGJnMnBCa0xLWVVtYUpDVnFUUzNqbzBhYkFJRXFMakErcWdEL1loRXFJWVlyRGZxT1B4aE1EU09jZUNpY0pjeHFBY1RsSXgyM2h3a0k3MlpMK3F6YUFhajlWVkdWdDNuKzdyTkFpcWNBQUFBQkpSVTVFcmtKZ2dnPT0iLAogICAgICAic2l6ZXMiOiAiMTIweDEyMCIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUFIZ0FBQUI0Q0FZQUFBQ3luZDRrQUFBQUVrbEVRVlI0bk8zYU1RNENNUXdGMFVyOGZRU3JMM0RBaUR5eGYzdWZacVV0SCtEZWl4Yzgvb05iZWJjY3Y4ZUIrREZRTFR5Z085NzMxVVpoWGh1RzFhT2hjbzhXdkhtRVlwdGJnMnBCa0xLWVVtYUpDVnFUUzNqbzBhYkFJRXFMakErcWdEL1loRXFJWVlyRGZxT1B4aE1EU09jZUNpY0pjeHFBY1RsSXgyM2h3a0k3MlpMK3F6YUFhajlWVkdWdDNuKzdyTkFpcWNBQUFBQkpSVTVFcmtKZ2dnPT0iLAogICAgICAic2l6ZXMiOiAiMTkyeDE5MiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUFIZ0FBQUI0Q0FZQUFBQ3luZDRrQUFBQUVrbEVRVlI0bk8zYU1RNENNUXdGMFVyOGZRU3JMM0RBaUR5eGYzdWZacVV0SCtEZWl4Yzgvb05iZWJjY3Y4ZUIrREZRTFR5Z085NzMxVVpoWGh1RzFhT2hjbzhXdkhtRVlwdGJnMnBCa0xLWVVtYUpDVnFUUzNqbzBhYkFJRXFMakErcWdEL1loRXFJWVlyRGZxT1B4aE1EU09jZUNpY0pjeHFBY1RsSXgyM2h3a0k3MlpMK3F6YUFhajlWVkdWdDNuKzdyTkFpcWNBQUFBQkpSVTVFcmtKZ2dnPT0iLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgIH0KICBdCn0=">
+    
+    <!-- PWA Icons for iOS -->
+    <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAAA5ZDbkAAAAEklEQVR4nO3aMQ4CMQwF0Ur8fQSrL3DAiDyxf3ufZqUt8H+Deeix8f/oNbeHcx8M3E">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            touch-action: manipulation;
+            transition: all 0.3s ease;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        body.landscape-mode {
+            padding: 0;
+        }
+        
+        canvas {
+            border: 2px solid #16213e;
+            background: #0f3460;
+            max-width: 100vw;
+            max-height: 100vh;
+            touch-action: none;
+            transition: all 0.3s ease;
+        }
+        
+        body.landscape-mode canvas {
+            width: 100vw !important;
+            height: 100vh !important;
+            border: none;
+        }
+        
+        .ui-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        .ui-element {
+            pointer-events: auto;
+        }
+        
+        .controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-size: 12px;
+            z-index: 10;
+        }
+        
+        .pwa-install-prompt {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: rgba(0, 255, 136, 0.9);
+            color: #1a1a2e;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            z-index: 1000;
+            display: none;
+            animation: slideUpIn 0.5s ease-out;
+        }
+        
+        .pwa-install-prompt button {
+            background: #1a1a2e;
+            color: #00ff88;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        @keyframes slideUpIn {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .orientation-hint {
+            display: none;
+            color: #00ff88;
+            font-size: 10px;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 1024px) and (orientation: portrait) {
+            .orientation-hint {
+                display: inline;
+            }
+        }
+        
+        .restart {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #e94560;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 10;
+            font-size: 14px;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .home-btn {
+            position: absolute;
+            top: 10px;
+            right: 120px;
+            background: #16213e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 10;
+            font-size: 14px;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .mobile-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            user-select: none;
+            z-index: 10;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .mobile-controls.active {
+            background: rgba(0, 255, 136, 0.3);
+            border-color: #00ff88;
+            transform: translateX(-50%) scale(1.1);
+        }
+        
+        .name-input {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            border: 3px solid #00ff88;
+            text-align: center;
+            color: white;
+            z-index: 20;
+        }
+        
+        .name-input input {
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 8px;
+            border: 2px solid #16213e;
+            background: #1a1a2e;
+            color: white;
+            margin: 10px;
+            width: 250px;
+            text-align: center;
+            -webkit-appearance: none;
+        }
+        
+        .name-input button {
+            padding: 15px 30px;
+            font-size: 16px;
+            background: #00ff88;
+            color: #1a1a2e;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .level-select {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            border: 3px solid #00ff88;
+            text-align: center;
+            color: white;
+            z-index: 20;
+            max-width: 90vw;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .level-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .level-card {
+            background: #1a1a2e;
+            border: 2px solid #16213e;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .level-card:hover {
+            border-color: #00ff88;
+            transform: scale(1.05);
+        }
+        
+        .level-card.completed {
+            border-color: #ffd700;
+            background: #2a2a3e;
+        }
+        
+        .level-card.locked {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .level-card.locked:hover {
+            transform: none;
+            border-color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .controls {
+                font-size: 10px;
+                top: 5px;
+                left: 5px;
+            }
+            
+            .restart {
+                top: 5px;
+                right: 5px;
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                top: 5px;
+                right: 85px;
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            canvas {
+                width: 100vw;
+                height: 60vh;
+            }
+            
+            .level-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            
+            .mobile-controls {
+                width: 90px;
+                height: 90px;
+                font-size: 18px;
+            }
+        }
+        
+        /* Enhanced landscape orientation styles for mobile */
+        @media screen and (orientation: landscape) and (max-width: 1024px) {
+            body {
+                height: 100vh;
+                width: 100vw;
+                overflow: hidden;
+            }
+            
+            canvas {
+                width: 100vw !important;
+                height: 100vh !important;
+                border: none;
+            }
+            
+            .controls {
+                font-size: 12px;
+                top: 10px;
+                left: 10px;
+                background: rgba(0, 0, 0, 0.7);
+                padding: 5px;
+                border-radius: 5px;
+            }
+            
+            .restart {
+                top: 10px;
+                right: 10px;
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .home-btn {
+                top: 10px;
+                right: 90px;
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .mobile-controls {
+                bottom: 15px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 70px;
+                height: 70px;
+                font-size: 16px;
+            }
+            
+            .name-input {
+                transform: translate(-50%, -50%) scale(0.9);
+            }
+            
+            .level-select {
+                transform: translate(-50%, -50%) scale(0.9);
+                max-width: 95vw;
+                max-height: 95vh;
+            }
+            
+            .level-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 10px;
+            }
+            
+            .level-card {
+                padding: 15px;
+                min-height: 100px;
+                font-size: 14px;
+            }
+        }
+        
+        /* Portrait mobile adjustments */
+        @media screen and (orientation: portrait) and (max-width: 768px) {
+            canvas {
+                width: 100vw;
+                height: 50vh;
+            }
+            
+            .mobile-controls {
+                bottom: 20px;
+            }
+        }
+        
+        /* iOS specific enhancements */
+        @supports (-webkit-touch-callout: none) {
+            body {
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+            }
+            
+            input {
+                -webkit-appearance: none;
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- PWA Install Prompt -->
+    <div class="pwa-install-prompt" id="installPrompt">
+        📱 Install Space Explorer as an app for the best experience!
+        <br>
+        <button id="installButton">Install App</button>
+        <button id="dismissInstall">Maybe Later</button>
+    </div>
+
+    <div class="ui-overlay">
+        <div class="controls ui-element" id="gameControls" style="display: none;">
+            TAP/HOLD screen or SPACE for jumps<br>
+            TAP again in air for double jump<br>
+            Collect ⭐ gold stars to unlock bridges<br>
+            Bounce on blue trampolines! Use slopes wisely!<br>
+            Avoid red spikes! Don't fly too high!<br>
+            <span class="orientation-hint">📱 Rotate device for fullscreen!</span>
+        </div>
+        <button class="restart ui-element" id="restartButton" style="display: none;">Restart</button>
+        <button class="home-btn ui-element" id="homeButton" style="display: none;">Home</button>
+        <div class="mobile-controls ui-element" id="jumpButton" style="display: none;">
+            JUMP
+        </div>
+        
+        <!-- Name input screen -->
+        <div class="name-input ui-element" id="nameInput">
+            <h1 style="color: #00ff88; margin-bottom: 20px; font-size: 28px;">🚀 Lance's Planetary Adventure 🪐</h1>
+            <p style="margin-bottom: 20px; font-size: 16px;">Enter your space explorer name:</p>
+            <input type="text" id="playerNameInput" placeholder="Enter your name..." maxlength="15">
+            <br>
+            <button id="startGameButton">Launch Adventure!</button>
+        </div>
+        
+        <!-- Level selection screen -->
+        <div class="level-select ui-element" id="levelSelect" style="display: none;">
+            <h1 style="color: #00ff88; margin-bottom: 10px;">🌌 Choose Your Destination 🌌</h1>
+            <p id="welcomeMessage" style="margin-bottom: 20px; font-size: 18px;"></p>
+            <div style="margin-bottom: 20px;">
+                <button id="customLevelsButton" style="padding: 15px 30px; background: #e94560; color: white; border: none; border-radius: 8px; font-size: 16px; margin-right: 10px; cursor: pointer; -webkit-tap-highlight-color: transparent;">🎨 Custom Levels</button>
+                <button id="profileButton" style="padding: 15px 30px; background: #ffd700; color: #1a1a2e; border: none; border-radius: 8px; font-size: 16px; margin-right: 10px; cursor: pointer; font-weight: bold; -webkit-tap-highlight-color: transparent;">📊 Profile & Stats</button>
+                <button id="changeNameButton" style="padding: 15px 30px; background: #16213e; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; -webkit-tap-highlight-color: transparent;">Change Name</button>
+            </div>
+            <div class="level-grid" id="levelGrid"></div>
+        </div>
+        
+        <!-- Player Profile/Stats screen -->
+        <div class="level-select ui-element" id="profileScreen" style="display: none;">
+            <h1 style="color: #ffd700; margin-bottom: 20px;">📊 Player Profile & Statistics 📊</h1>
+            <div id="profileContent" style="text-align: left; max-width: 600px; margin: 0 auto;"></div>
+            <div style="margin-top: 30px;">
+                <button id="backFromProfileButton" style="padding: 15px 30px; background: #00ff88; color: #1a1a2e; border: none; border-radius: 8px; font-size: 16px; margin-right: 20px; cursor: pointer; font-weight: bold; -webkit-tap-highlight-color: transparent;">← Back to Levels</button>
+                <button id="resetDataButton" style="padding: 15px 30px; background: #ff4444; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; -webkit-tap-highlight-color: transparent;">🗑️ Reset All Data</button>
+            </div>
+        </div>
+        
+        <!-- Custom level selection screen -->
+        <div class="level-select ui-element" id="customSelect" style="display: none;">
+            <h1 style="color: #e94560; margin-bottom: 10px;">🎨 Custom Community Levels 🎨</h1>
+            <p style="margin-bottom: 20px; font-size: 16px; color: #ffaa00;">Hand-drawn levels created by the community!</p>
+            <div style="margin-bottom: 20px;">
+                <button id="backToMainButton" style="padding: 15px 30px; background: #00ff88; color: #1a1a2e; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: bold; -webkit-tap-highlight-color: transparent;">← Back to Planets</button>
+            </div>
+            <div class="level-grid" id="customGrid"></div>
+        </div>
+    </div>
+    
+    <canvas id="gameCanvas" width="1200" height="600"></canvas>
+
+    <script>
+        // Service Worker Registration for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('data:application/javascript;base64,' + btoa(`
+                    const CACHE_NAME = 'space-explorer-v1';
+                    const urlsToCache = [
+                        './',
+                        './index.html'
+                    ];
+
+                    self.addEventListener('install', function(event) {
+                        event.waitUntil(
+                            caches.open(CACHE_NAME)
+                                .then(function(cache) {
+                                    return cache.addAll(urlsToCache);
+                                })
+                        );
+                    });
+
+                    self.addEventListener('fetch', function(event) {
+                        event.respondWith(
+                            caches.match(event.request)
+                                .then(function(response) {
+                                    if (response) {
+                                        return response;
+                                    }
+                                    return fetch(event.request);
+                                }
+                            )
+                        );
+                    });
+                `))
+                .then(function(registration) {
+                    console.log('ServiceWorker registration successful');
+                }, function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+
+        // PWA Install Prompt
+        let deferredPrompt;
+        const installPrompt = document.getElementById('installPrompt');
+        const installButton = document.getElementById('installButton');
+        const dismissButton = document.getElementById('dismissInstall');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installPrompt.style.display = 'block';
+        });
+
+        installButton.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response to the install prompt: ${outcome}`);
+                deferredPrompt = null;
+            }
+            installPrompt.style.display = 'none';
+        });
+
+        dismissButton.addEventListener('click', () => {
+            installPrompt.style.display = 'none';
+        });
+
+        // Hide install prompt if already installed
+        window.addEventListener('appinstalled', () => {
+            installPrompt.style.display = 'none';
+            deferredPrompt = null;
+        });
+
+        // Enhanced mobile detection and optimization
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        function isiOS() {
+            return /iPad|iPhone|iPod/.test(navigator.userAgent);
+        }
+
+        // iOS specific optimizations
+        if (isiOS()) {
+            document.addEventListener('touchstart', function() {}, {passive: true});
+            
+            // Prevent zoom on double tap
+            document.addEventListener('touchend', function(event) {
+                const now = (new Date()).getTime();
+                if (now - window.lastTouchEnd <= 300) {
+                    event.preventDefault();
+                }
+                window.lastTouchEnd = now;
+            }, false);
+        }
+
+        // Prevent context menu and text selection on mobile
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+        });
+
+        // [ORIGINAL GAME CODE CONTINUES HERE - Same as v154 but with enhanced mobile optimizations]
+        
+        // Simple, stable code patterns
+        var canvas = document.getElementById('gameCanvas');
+        var ctx = canvas.getContext('2d');
+
+        // Game states
+        var GameState = {
+            NAME_INPUT: 'nameInput',
+            LEVEL_SELECT: 'levelSelect',
+            CUSTOM_SELECT: 'customSelect',
+            PLAYING: 'playing'
+        };
+
+        // Game variables
+        var currentGameState = GameState.NAME_INPUT;
+        var playerName = '';
+        var currentLevel = 0;
+        var currentLevelSet = 'main'; // 'main' or 'custom'
+        var gameRunning = false;
+        var gameWon = false;
+        var camera = { x: 0, y: 0 };
+
+        // Player object
+        var player = {
+            x: 100,
+            y: 400,
+            width: 30,
+            height: 30,
+            velocityY: 0,
+            velocityX: 3,
+            minJumpPower: -12,
+            maxJumpPower: -20,
+            gravity: 0.8,
+            onGround: false,
+            onSlope: false,
+            slopeAngle: 0,
+            doubleJumpAvailable: true,
+            color: '#00ff88',
+            jumpChargeTime: 0,
+            maxChargeTime: 15
+        };
+
+        // Enhanced persistent stats with achievements
+        var persistentStats = {
+            totalDeaths: 0,
+            totalCompletions: 0,
+            totalJumps: 0,
+            totalTrampolineBounces: 0,
+            totalGoldStars: 0,
+            bestTime: null,
+            gamesPlayed: 0,
+            levelsCompleted: [false,false,false,false,false,false,false,false,false,false,false,false],
+            levelBestTimes: [null,null,null,null,null,null,null,null,null,null,null,null],
+            levelAttempts: [0,0,0,0,0,0,0,0,0,0,0,0],
+            customLevelsCompleted: [],
+            achievements: {
+                firstJump: false,
+                firstDeath: false,
+                firstCompletion: false,
+                speedRunner: false,      // Complete level in under 30s
+                perfectionist: false,   // Get all stars in a level
+                persistent: false,      // Die 100 times
+                explorer: false,        // Complete 5 levels
+                master: false,          // Complete all main levels
+                bouncer: false,         // Use 50 trampolines
+                starCollector: false,   // Collect 25 gold stars
+                customChampion: false   // Complete a custom level
+            },
+            totalPlayTime: 0,
+            sessionStartTime: Date.now(),
+            lastPlayed: Date.now()
+        };
+
+        // Storage management system
+        var StorageManager = {
+            // Check if localStorage is available
+            isLocalStorageAvailable: function() {
+                try {
+                    var test = 'storageTest';
+                    localStorage.setItem(test, test);
+                    localStorage.removeItem(test);
+                    return true;
+                } catch(e) {
+                    return false;
+                }
+            },
+
+            // Save data with localStorage primary, cookies fallback
+            save: function(key, data) {
+                var jsonData = JSON.stringify(data);
+                
+                if (this.isLocalStorageAvailable()) {
+                    try {
+                        localStorage.setItem('geometry_dash_' + key, jsonData);
+                        return true;
+                    } catch(e) {
+                        console.warn('localStorage failed, falling back to cookies');
+                    }
+                }
+                
+                // Fallback to cookies
+                this.setCookie('geometry_dash_' + key, jsonData, 365);
+                return true;
+            },
+
+            // Load data with localStorage primary, cookies fallback
+            load: function(key) {
+                if (this.isLocalStorageAvailable()) {
+                    try {
+                        var data = localStorage.getItem('geometry_dash_' + key);
+                        if (data) {
+                            return JSON.parse(data);
+                        }
+                    } catch(e) {
+                        console.warn('localStorage read failed, trying cookies');
+                    }
+                }
+                
+                // Fallback to cookies
+                var cookieData = this.getCookie('geometry_dash_' + key);
+                if (cookieData) {
+                    try {
+                        return JSON.parse(cookieData);
+                    } catch(e) {
+                        return null;
+                    }
+                }
+                return null;
+            },
+
+            // Cookie functions
+            setCookie: function(name, value, days) {
+                if (!days) days = 365;
+                var expires = new Date();
+                expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+                document.cookie = name + '=' + encodeURIComponent(value) + ';expires=' + expires.toUTCString() + ';path=/';
+            },
+
+            getCookie: function(name) {
+                var nameEQ = name + "=";
+                var ca = document.cookie.split(';');
+                for(var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                    if (c.indexOf(nameEQ) === 0) {
+                        return decodeURIComponent(c.substring(nameEQ.length, c.length));
+                    }
+                }
+                return null;
+            },
+
+            // Clear all game data
+            clearAll: function() {
+                if (this.isLocalStorageAvailable()) {
+                    var keys = Object.keys(localStorage);
+                    for (var i = 0; i < keys.length; i++) {
+                        if (keys[i].startsWith('geometry_dash_')) {
+                            localStorage.removeItem(keys[i]);
+                        }
+                    }
+                }
+                
+                // Clear cookies
+                this.setCookie('geometry_dash_playerProfile', '', -1);
+                this.setCookie('geometry_dash_gameStats', '', -1);
+                this.setCookie('geometry_dash_achievements', '', -1);
+            }
+        };
+
+        // Achievement system
+        var AchievementManager = {
+            unlock: function(achievementKey) {
+                if (!persistentStats.achievements[achievementKey]) {
+                    persistentStats.achievements[achievementKey] = true;
+                    this.showAchievementNotification(achievementKey);
+                    savePersistentStats();
+                    return true;
+                }
+                return false;
+            },
+
+            showAchievementNotification: function(achievementKey) {
+                var achievements = {
+                    firstJump: { title: "First Steps", desc: "Take your first jump!" },
+                    firstDeath: { title: "Learning Experience", desc: "Experience your first setback" },
+                    firstCompletion: { title: "Planet Conqueror", desc: "Complete your first level!" },
+                    speedRunner: { title: "Speed Demon", desc: "Complete a level in under 30 seconds!" },
+                    perfectionist: { title: "Star Master", desc: "Collect all stars in a level!" },
+                    persistent: { title: "Never Give Up", desc: "Die 100 times - persistence pays off!" },
+                    explorer: { title: "Space Explorer", desc: "Complete 5 different planets!" },
+                    master: { title: "Solar System Master", desc: "Conquer all planets!" },
+                    bouncer: { title: "Trampoline Champion", desc: "Use 50 trampolines!" },
+                    starCollector: { title: "Stellar Collector", desc: "Collect 25 gold stars!" },
+                    customChampion: { title: "Community Hero", desc: "Complete a custom level!" }
+                };
+
+                var achievement = achievements[achievementKey];
+                if (achievement) {
+                    // Create achievement popup
+                    var popup = document.createElement('div');
+                    popup.style.cssText = `
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        background: linear-gradient(45deg, #ffd700, #ffaa00);
+                        color: #1a1a2e;
+                        padding: 15px 20px;
+                        border-radius: 10px;
+                        box-shadow: 0 4px 20px rgba(255, 215, 0, 0.5);
+                        z-index: 1000;
+                        font-family: Arial, sans-serif;
+                        font-weight: bold;
+                        max-width: 300px;
+                        animation: slideIn 0.5s ease-out;
+                    `;
+                    
+                    popup.innerHTML = `
+                        <div style="font-size: 16px; margin-bottom: 5px;">🏆 Achievement Unlocked!</div>
+                        <div style="font-size: 14px; font-weight: bold;">${achievement.title}</div>
+                        <div style="font-size: 12px; opacity: 0.8;">${achievement.desc}</div>
+                    `;
+                    
+                    // Add CSS animation
+                    if (!document.getElementById('achievementCSS')) {
+                        var style = document.createElement('style');
+                        style.id = 'achievementCSS';
+                        style.textContent = `
+                            @keyframes slideIn {
+                                from { transform: translateX(100%); opacity: 0; }
+                                to { transform: translateX(0); opacity: 1; }
+                            }
+                            @keyframes slideOut {
+                                from { transform: translateX(0); opacity: 1; }
+                                to { transform: translateX(100%); opacity: 0; }
+                            }
+                        `;
+                        document.head.appendChild(style);
+                    }
+                    
+                    document.body.appendChild(popup);
+                    
+                    // Remove after 4 seconds
+                    setTimeout(function() {
+                        popup.style.animation = 'slideOut 0.5s ease-out';
+                        setTimeout(function() {
+                            if (popup.parentNode) {
+                                popup.parentNode.removeChild(popup);
+                            }
+                        }, 500);
+                    }, 4000);
+                }
+            },
+
+            checkAchievements: function() {
+                // Check various achievement conditions
+                if (persistentStats.totalJumps >= 1) {
+                    this.unlock('firstJump');
+                }
+                
+                if (persistentStats.totalDeaths >= 1) {
+                    this.unlock('firstDeath');
+                }
+                
+                if (persistentStats.totalCompletions >= 1) {
+                    this.unlock('firstCompletion');
+                }
+                
+                if (persistentStats.totalDeaths >= 100) {
+                    this.unlock('persistent');
+                }
+                
+                if (persistentStats.totalCompletions >= 5) {
+                    this.unlock('explorer');
+                }
+                
+                if (persistentStats.totalCompletions >= 12) {
+                    this.unlock('master');
+                }
+                
+                if (persistentStats.totalTrampolineBounces >= 50) {
+                    this.unlock('bouncer');
+                }
+                
+                if (persistentStats.totalGoldStars >= 25) {
+                    this.unlock('starCollector');
+                }
+                
+                // Check for speed runner (complete level under 30s)
+                if (stats.endTime && stats.startTime) {
+                    var completionTime = (stats.endTime - stats.startTime) / 1000;
+                    if (completionTime < 30) {
+                        this.unlock('speedRunner');
+                    }
+                }
+                
+                // Check for perfectionist (all stars in current level)
+                var level = getCurrentLevel();
+                if (level.goldStars && level.goldStars.length > 0) {
+                    var allCollected = true;
+                    for (var i = 0; i < level.goldStars.length; i++) {
+                        if (!level.goldStars[i].collected) {
+                            allCollected = false;
+                            break;
+                        }
+                    }
+                    if (allCollected) {
+                        this.unlock('perfectionist');
+                    }
+                }
+                
+                // Check custom level completion
+                if (currentLevelSet === 'custom' && gameWon) {
+                    this.unlock('customChampion');
+                }
+            }
+        };
+
+        // Input handling
+        var spacePressed = false;
+
+        // Visual effects
+        var effects = [];
+
+        // Level definitions with simple structure
+        var levels = [
+            {
+                name: "Mercury",
+                emoji: "☿️",
+                description: "The closest planet to the sun",
+                difficulty: 1,
+                length: 1500,
+                goldStarsRequired: 1,
+                platforms: [
+                    { x: 0, y: 500, width: 200, height: 100 },
+                    { x: 300, y: 480, width: 100, height: 120 },
+                    { x: 500, y: 460, width: 120, height: 140 },
+                    { x: 700, y: 440, width: 100, height: 160 },
+                    { x: 900, y: 420, width: 150, height: 180 },
+                    { x: 1150, y: 500, width: 200, height: 100 },
+                    { x: 1400, y: 480, width: 200, height: 120 }
+                ],
+                slopes: [
+                    { x: 200, y: 500, width: 100, height: 40, angle: 30 },
+                    { x: 620, y: 440, width: 80, height: 30, angle: -25 },
+                    { x: 1050, y: 420, width: 100, height: 50, angle: 45 }
+                ],
+                spikes: [
+                    { x: 450, y: 440, width: 20, height: 20 },
+                    { x: 650, y: 420, width: 20, height: 20 },
+                    { x: 1050, y: 400, width: 20, height: 20 }
+                ],
+                trampolines: [
+                    { x: 600, y: 440, radius: 20 },
+                    { x: 1000, y: 400, radius: 20 }
+                ],
+                goldStars: [
+                    { x: 350, y: 450, collected: false },
+                    { x: 750, y: 410, collected: false }
+                ],
+                bridges: [
+                    { x: 820, y: 420, width: 150, height: 10, unlocked: false, gapStart: 820, gapEnd: 970 }
+                ]
+            },
+            {
+                name: "Venus", 
+                emoji: "♀️",
+                description: "The hottest planet with toxic atmosphere",
+                difficulty: 2,
+                length: 1800,
+                goldStarsRequired: 1,
+                platforms: [
+                    { x: 0, y: 500, width: 180, height: 100 },
+                    { x: 250, y: 480, width: 80, height: 120 },
+                    { x: 400, y: 450, width: 90, height: 150 },
+                    { x: 550, y: 420, width: 100, height: 180 },
+                    { x: 750, y: 380, width: 80, height: 220 },
+                    { x: 900, y: 400, width: 120, height: 200 },
+                    { x: 1100, y: 460, width: 100, height: 140 },
+                    { x: 1300, y: 440, width: 150, height: 160 },
+                    { x: 1550, y: 500, width: 300, height: 100 }
+                ],
+                slopes: [
+                    { x: 180, y: 500, width: 70, height: 25, angle: 35 },
+                    { x: 330, y: 480, width: 70, height: 35, angle: -30 },
+                    { x: 490, y: 450, width: 60, height: 40, angle: 40 },
+                    { x: 830, y: 380, width: 70, height: 30, angle: -35 }
+                ],
+                spikes: [
+                    { x: 330, y: 460, width: 20, height: 20 },
+                    { x: 490, y: 430, width: 20, height: 20 },
+                    { x: 680, y: 400, width: 20, height: 20 },
+                    { x: 830, y: 360, width: 20, height: 20 },
+                    { x: 1050, y: 440, width: 20, height: 20 },
+                    { x: 1250, y: 420, width: 20, height: 20 }
+                ],
+                trampolines: [
+                    { x: 350, y: 460, radius: 20 },
+                    { x: 650, y: 400, radius: 20 },
+                    { x: 1000, y: 380, radius: 20 },
+                    { x: 1450, y: 420, radius: 20 }
+                ],
+                goldStars: [
+                    { x: 300, y: 450, collected: false },
+                    { x: 800, y: 350, collected: false },
+                    { x: 1200, y: 420, collected: false }
+                ],
+                bridges: [
+                    { x: 1020, y: 460, width: 160, height: 10, unlocked: false, gapStart: 1020, gapEnd: 1180 }
+                ]
+            },
+            {
+                name: "Earth",
+                emoji: "🌍", 
+                description: "Our beautiful blue home planet",
+                difficulty: 3,
+                length: 2000,
+                goldStarsRequired: 2,
+                platforms: [
+                    { x: 0, y: 500, width: 150, height: 100 },
+                    { x: 200, y: 480, width: 80, height: 120 },
+                    { x: 330, y: 460, width: 70, height: 140 },
+                    { x: 450, y: 440, width: 90, height: 160 },
+                    { x: 600, y: 400, width: 100, height: 200 },
+                    { x: 780, y: 380, width: 80, height: 220 },
+                    { x: 920, y: 350, width: 90, height: 250 },
+                    { x: 1100, y: 420, width: 120, height: 180 },
+                    { x: 1280, y: 460, width: 100, height: 140 },
+                    { x: 1450, y: 400, width: 110, height: 200 },
+                    { x: 1650, y: 480, width: 200, height: 120 },
+                    { x: 1900, y: 500, width: 200, height: 100 }
+                ],
+                slopes: [
+                    { x: 150, y: 500, width: 50, height: 25, angle: 40 },
+                    { x: 280, y: 480, width: 50, height: 25, angle: -35 },
+                    { x: 400, y: 460, width: 50, height: 30, angle: 45 },
+                    { x: 540, y: 440, width: 60, height: 45, angle: -40 },
+                    { x: 700, y: 400, width: 80, height: 35, angle: -30 },
+                    { x: 860, y: 380, width: 60, height: 40, angle: -45 },
+                    { x: 1010, y: 350, width: 90, height: 50, angle: 35 }
+                ],
+                spikes: [
+                    { x: 280, y: 440, width: 20, height: 20 },
+                    { x: 400, y: 420, width: 20, height: 20 },
+                    { x: 550, y: 380, width: 20, height: 20 },
+                    { x: 720, y: 360, width: 20, height: 20 },
+                    { x: 860, y: 330, width: 20, height: 20 },
+                    { x: 1050, y: 400, width: 20, height: 20 },
+                    { x: 1230, y: 440, width: 20, height: 20 },
+                    { x: 1400, y: 380, width: 20, height: 20 },
+                    { x: 1600, y: 460, width: 20, height: 20 }
+                ],
+                trampolines: [
+                    { x: 380, y: 420, radius: 20 },
+                    { x: 680, y: 360, radius: 20 },
+                    { x: 1000, y: 400, radius: 20 },
+                    { x: 1350, y: 380, radius: 20 },
+                    { x: 1750, y: 460, radius: 20 }
+                ],
+                goldStars: [
+                    { x: 250, y: 450, collected: false },
+                    { x: 600, y: 370, collected: false },
+                    { x: 1150, y: 390, collected: false },
+                    { x: 1500, y: 370, collected: false }
+                ],
+                bridges: [
+                    { x: 1380, y: 460, width: 170, height: 10, unlocked: false, gapStart: 1380, gapEnd: 1550 },
+                    { x: 1850, y: 480, width: 150, height: 10, unlocked: false, gapStart: 1850, gapEnd: 2000 }
+                ]
+            }
+        ];
+
+        // Custom levels based on hand-drawn designs
+        var customLevels = [
+            {
+                name: "The Challenge",
+                emoji: "🎨",
+                description: "Hand-drawn community level - Level 23 GeometryDash",
+                difficulty: 8,
+                length: 3500,
+                goldStarsRequired: 3,
+                platforms: [
+                    // Starting area - safe zone
+                    { x: 0, y: 500, width: 200, height: 100 },
+                    
+                    // First section - winding path from drawing
+                    { x: 250, y: 450, width: 80, height: 150 },
+                    { x: 380, y: 400, width: 60, height: 200 },
+                    { x: 480, y: 350, width: 70, height: 250 },
+                    
+                    // Curved section interpretation
+                    { x: 600, y: 300, width: 50, height: 300 },
+                    { x: 700, y: 250, width: 60, height: 350 },
+                    { x: 810, y: 280, width: 50, height: 320 },
+                    { x: 910, y: 320, width: 60, height: 280 },
+                    
+                    // Middle complex area from drawing
+                    { x: 1020, y: 380, width: 40, height: 220 },
+                    { x: 1100, y: 420, width: 50, height: 180 },
+                    { x: 1200, y: 360, width: 45, height: 240 },
+                    { x: 1300, y: 400, width: 55, height: 200 },
+                    
+                    // Narrow passage section
+                    { x: 1400, y: 450, width: 30, height: 150 },
+                    { x: 1470, y: 480, width: 35, height: 120 },
+                    { x: 1540, y: 460, width: 40, height: 140 },
+                    
+                    // Multi-level platforms from drawing
+                    { x: 1650, y: 520, width: 80, height: 80 },
+                    { x: 1650, y: 420, width: 80, height: 80 },
+                    { x: 1650, y: 320, width: 80, height: 80 },
+                    
+                    { x: 1780, y: 480, width: 60, height: 120 },
+                    { x: 1780, y: 350, width: 60, height: 120 },
+                    
+                    // Complex maze-like section
+                    { x: 1900, y: 500, width: 50, height: 100 },
+                    { x: 1900, y: 380, width: 50, height: 100 },
+                    { x: 1900, y: 260, width: 50, height: 100 },
+                    
+                    { x: 2000, y: 440, width: 40, height: 160 },
+                    { x: 2000, y: 300, width: 40, height: 120 },
+                    
+                    // Staircase section from drawing
+                    { x: 2100, y: 520, width: 60, height: 80 },
+                    { x: 2180, y: 500, width: 60, height: 100 },
+                    { x: 2260, y: 480, width: 60, height: 120 },
+                    { x: 2340, y: 460, width: 60, height: 140 },
+                    { x: 2420, y: 440, width: 60, height: 160 },
+                    
+                    // Final challenging section
+                    { x: 2550, y: 420, width: 45, height: 180 },
+                    { x: 2650, y: 380, width: 50, height: 220 },
+                    { x: 2750, y: 360, width: 55, height: 240 },
+                    { x: 2860, y: 400, width: 60, height: 200 },
+                    
+                    // Victory platforms
+                    { x: 2980, y: 450, width: 100, height: 150 },
+                    { x: 3150, y: 480, width: 150, height: 120 },
+                    { x: 3350, y: 500, width: 200, height: 100 }
+                ],
+                slopes: [
+                    // Curved sections from the drawing
+                    { x: 330, y: 450, width: 50, height: 35, angle: 35 },
+                    { x: 440, y: 400, width: 40, height: 30, angle: -30 },
+                    { x: 550, y: 350, width: 50, height: 40, angle: 40 },
+                    { x: 650, y: 300, width: 50, height: 35, angle: -35 },
+                    { x: 760, y: 250, width: 50, height: 40, angle: 30 },
+                    { x: 860, y: 280, width: 50, height: 35, angle: -25 },
+                    
+                    // Complex middle area slopes
+                    { x: 1060, y: 380, width: 40, height: 30, angle: 45 },
+                    { x: 1150, y: 420, width: 50, height: 35, angle: -40 },
+                    { x: 1250, y: 360, width: 50, height: 40, angle: 35 },
+                    
+                    // Staircase area slopes
+                    { x: 2500, y: 440, width: 50, height: 30, angle: -20 },
+                    { x: 2700, y: 380, width: 50, height: 35, angle: 25 },
+                    { x: 2920, y: 400, width: 60, height: 40, angle: 30 }
+                ],
+                spikes: [
+                    // Hazards throughout the complex path
+                    { x: 320, y: 430, width: 15, height: 15 },
+                    { x: 460, y: 330, width: 15, height: 15 },
+                    { x: 580, y: 280, width: 15, height: 15 },
+                    { x: 680, y: 230, width: 15, height: 15 },
+                    { x: 780, y: 260, width: 15, height: 15 },
+                    { x: 880, y: 300, width: 15, height: 15 },
+                    
+                    // Narrow passage hazards
+                    { x: 1080, y: 360, width: 15, height: 15 },
+                    { x: 1180, y: 400, width: 15, height: 15 },
+                    { x: 1280, y: 340, width: 15, height: 15 },
+                    { x: 1380, y: 380, width: 15, height: 15 },
+                    
+                    // Tight corridor spikes
+                    { x: 1430, y: 430, width: 12, height: 12 },
+                    { x: 1500, y: 460, width: 12, height: 12 },
+                    { x: 1570, y: 440, width: 12, height: 12 },
+                    
+                    // Multi-level platform hazards
+                    { x: 1730, y: 500, width: 15, height: 15 },
+                    { x: 1730, y: 400, width: 15, height: 15 },
+                    { x: 1730, y: 300, width: 15, height: 15 },
+                    
+                    // Maze section spikes
+                    { x: 1950, y: 480, width: 12, height: 12 },
+                    { x: 1950, y: 360, width: 12, height: 12 },
+                    { x: 1950, y: 240, width: 12, height: 12 },
+                    
+                    { x: 2040, y: 420, width: 12, height: 12 },
+                    { x: 2040, y: 280, width: 12, height: 12 },
+                    
+                    // Staircase hazards
+                    { x: 2130, y: 500, width: 15, height: 15 },
+                    { x: 2210, y: 480, width: 15, height: 15 },
+                    { x: 2290, y: 460, width: 15, height: 15 },
+                    { x: 2370, y: 440, width: 15, height: 15 },
+                    { x: 2450, y: 420, width: 15, height: 15 },
+                    
+                    // Final section challenges
+                    { x: 2580, y: 400, width: 15, height: 15 },
+                    { x: 2680, y: 360, width: 15, height: 15 },
+                    { x: 2780, y: 340, width: 15, height: 15 },
+                    { x: 2890, y: 380, width: 15, height: 15 }
+                ],
+                trampolines: [
+                    // Strategic bounce pads from drawing
+                    { x: 400, y: 380, radius: 18 },
+                    { x: 520, y: 330, radius: 18 },
+                    { x: 720, y: 230, radius: 18 },
+                    { x: 900, y: 300, radius: 18 },
+                    
+                    // Complex area bounces
+                    { x: 1120, y: 400, radius: 16 },
+                    { x: 1320, y: 380, radius: 16 },
+                    { x: 1450, y: 430, radius: 16 },
+                    
+                    // Multi-level assists
+                    { x: 1700, y: 440, radius: 20 },
+                    { x: 1820, y: 400, radius: 18 },
+                    
+                    // Maze area helps
+                    { x: 1950, y: 420, radius: 16 },
+                    { x: 2050, y: 380, radius: 16 },
+                    
+                    // Staircase assists
+                    { x: 2480, y: 420, radius: 18 },
+                    { x: 2720, y: 360, radius: 18 },
+                    
+                    // Final area boost
+                    { x: 2920, y: 380, radius: 20 }
+                ],
+                goldStars: [
+                    // High-risk, high-reward star placement
+                    { x: 500, y: 310, collected: false }, // Curved section challenge
+                    { x: 1150, y: 340, collected: false }, // Narrow passage risk
+                    { x: 1700, y: 280, collected: false }, // Multi-level platform top
+                    { x: 1950, y: 200, collected: false }, // Maze section extreme
+                    { x: 2400, y: 400, collected: false }, // Staircase precision
+                    { x: 2800, y: 320, collected: false }  // Final gauntlet
+                ],
+                bridges: [
+                    // Three strategic bridges requiring star collection
+                    { x: 1600, y: 450, width: 170, height: 12, unlocked: false, gapStart: 1600, gapEnd: 1770 },
+                    { x: 2500, y: 440, width: 180, height: 12, unlocked: false, gapStart: 2500, gapEnd: 2680 },
+                    { x: 3100, y: 480, width: 150, height: 12, unlocked: false, gapStart: 3100, gapEnd: 3250 }
+                ]
+            }
+        ];
+
+        // Mars level - manually crafted for proper difficulty progression
+        levels.push({
+            name: "Mars",
+            emoji: "♂️",
+            description: "The red planet of future colonization",
+            difficulty: 4,
+            length: 2300,
+            goldStarsRequired: 2,
+            platforms: [
+                // Safe starting area
+                { x: 0, y: 500, width: 250, height: 100 },
+                { x: 300, y: 480, width: 120, height: 120 },
+                { x: 480, y: 460, width: 100, height: 140 },
+                { x: 640, y: 440, width: 110, height: 160 },
+                { x: 800, y: 420, width: 90, height: 180 },
+                { x: 950, y: 400, width: 100, height: 200 },
+                { x: 1100, y: 380, width: 80, height: 220 },
+                { x: 1240, y: 360, width: 90, height: 240 },
+                { x: 1390, y: 420, width: 120, height: 180 },
+                { x: 1560, y: 450, width: 100, height: 150 },
+                { x: 1720, y: 430, width: 110, height: 170 },
+                { x: 1890, y: 460, width: 140, height: 140 },
+                { x: 2080, y: 480, width: 150, height: 120 },
+                { x: 2280, y: 500, width: 200, height: 100 }
+            ],
+            slopes: [
+                // Gradual introduction to slopes
+                { x: 250, y: 500, width: 80, height: 30, angle: 25 }, // Gentle uphill
+                { x: 420, y: 480, width: 60, height: 25, angle: -20 }, // Gentle downhill
+                { x: 580, y: 460, width: 60, height: 35, angle: 35 }, // Steeper uphill
+                { x: 750, y: 440, width: 50, height: 30, angle: -30 }, // Steeper downhill
+                { x: 890, y: 420, width: 60, height: 40, angle: 40 }, // Challenge uphill
+                { x: 1050, y: 400, width: 50, height: 25, angle: -35 }, // Fast downhill
+                { x: 1180, y: 380, width: 60, height: 45, angle: 45 }, // Max uphill
+                { x: 1330, y: 360, width: 60, height: 35, angle: -40 }, // Steep downhill
+                { x: 1510, y: 420, width: 50, height: 35, angle: 30 }, // Final uphill challenge
+                { x: 1670, y: 450, width: 50, height: 25, angle: -25 } // Descent to finish
+            ],
+            spikes: [
+                // Placed away from starting area, strategic positioning
+                { x: 420, y: 440, width: 20, height: 20 },
+                { x: 580, y: 420, width: 20, height: 20 },
+                { x: 730, y: 400, width: 20, height: 20 },
+                { x: 880, y: 380, width: 20, height: 20 },
+                { x: 1030, y: 360, width: 20, height: 20 },
+                { x: 1170, y: 340, width: 20, height: 20 },
+                { x: 1320, y: 320, width: 20, height: 20 },
+                { x: 1480, y: 400, width: 20, height: 20 },
+                { x: 1640, y: 430, width: 20, height: 20 },
+                { x: 1800, y: 440, width: 20, height: 20 },
+                { x: 1960, y: 440, width: 20, height: 20 }
+            ],
+            trampolines: [
+                // Strategic placement for advanced techniques
+                { x: 500, y: 440, radius: 20 },
+                { x: 780, y: 400, radius: 20 },
+                { x: 1020, y: 360, radius: 20 },
+                { x: 1280, y: 340, radius: 20 },
+                { x: 1600, y: 430, radius: 20 },
+                { x: 1950, y: 440, radius: 20 }
+            ],
+            goldStars: [
+                // Positioned for risk/reward decisions
+                { x: 350, y: 450, collected: false }, // Early accessible star
+                { x: 700, y: 390, collected: false }, // Requires slope navigation
+                { x: 1150, y: 330, collected: false }, // High risk, steep slope area
+                { x: 1450, y: 380, collected: false }, // Trampoline section
+                { x: 1850, y: 420, collected: false }  // Near end challenge
+            ],
+            bridges: [
+                // Two bridges requiring strategic star collection
+                { x: 1350, y: 420, width: 170, height: 10, unlocked: false, gapStart: 1350, gapEnd: 1520 }, // First bridge (1 star)
+                { x: 2030, y: 460, width: 180, height: 10, unlocked: false, gapStart: 2030, gapEnd: 2210 }  // Second bridge (2 stars)
+            ]
+        });
+
+        // Add more simplified levels for remaining planets
+        for (var i = 4; i < 12; i++) {
+            var planetNames = ["Jupiter", "Saturn", "Uranus", "Neptune", "Pluto", "Ceres", "Makemake", "Eris"];
+            var planetEmojis = ["🪐", "🪐", "🔵", "🔵", "🪐", "🌑", "🌘", "⚫"];
+            var descriptions = [
+                "The giant gas planet with great storms", 
+                "The beautiful ringed planet",
+                "The tilted ice giant planet",
+                "The windiest planet in our solar system",
+                "The beloved former ninth planet",
+                "The largest object in the asteroid belt",
+                "The mysterious dwarf planet",
+                "The most distant dwarf planet"
+            ];
+
+            var levelLength = 1800 + (i * 200);
+            var platformCount = 12 + i;
+            var spikeCount = 10 + i;
+            var goldStarCount = 2 + Math.floor(i / 3);
+            var bridgeCount = 1 + Math.floor(i / 3);
+
+            var level = {
+                name: planetNames[i - 4],
+                emoji: planetEmojis[i - 4],
+                description: descriptions[i - 4],
+                difficulty: i + 1,
+                length: levelLength,
+                goldStarsRequired: goldStarCount,
+                platforms: [],
+                slopes: [],
+                spikes: [],
+                trampolines: [],
+                goldStars: [],
+                bridges: []
+            };
+
+            // Generate platforms with safe starting area
+            level.platforms.push({ x: 0, y: 500, width: 200, height: 100 }); // Safe start
+            for (var p = 1; p < platformCount; p++) {
+                level.platforms.push({
+                    x: 150 + p * (levelLength / platformCount),
+                    y: 400 + Math.sin(p * 0.5) * 100,
+                    width: 80 + Math.random() * 40,
+                    height: 200 - Math.sin(p * 0.5) * 100
+                });
+            }
+
+            // Generate slopes (start after safe area)
+            for (var s = 0; s < Math.min(8, i + 2); s++) {
+                level.slopes.push({
+                    x: 200 + s * (levelLength / 8),
+                    y: 380 + Math.sin(s * 0.3) * 80,
+                    width: 80,
+                    height: 40,
+                    angle: (Math.sin(s) * 60) - 30
+                });
+            }
+
+            // Generate spikes (avoid starting area)
+            for (var sp = 0; sp < spikeCount; sp++) {
+                level.spikes.push({
+                    x: 300 + sp * ((levelLength - 300) / spikeCount),
+                    y: 350 + Math.cos(sp * 0.7) * 50,
+                    width: Math.max(8, 20 - i),
+                    height: Math.max(8, 20 - i)
+                });
+            }
+
+            // Generate trampolines
+            for (var t = 0; t < Math.min(10, i + 2); t++) {
+                level.trampolines.push({
+                    x: 250 + t * ((levelLength - 250) / 10),
+                    y: 350 + Math.sin(t * 0.6) * 70,
+                    radius: Math.max(8, 20 - (i * 0.5))
+                });
+            }
+
+            // Generate gold stars
+            for (var g = 0; g < goldStarCount; g++) {
+                level.goldStars.push({
+                    x: 300 + g * ((levelLength - 300) / goldStarCount),
+                    y: 300 + Math.cos(g * 0.8) * 80,
+                    collected: false
+                });
+            }
+
+            // Generate bridges
+            for (var b = 0; b < bridgeCount; b++) {
+                var bridgeX = 500 + b * ((levelLength - 500) / bridgeCount);
+                level.bridges.push({
+                    x: bridgeX,
+                    y: 400,
+                    width: 150 + (i * 10),
+                    height: 10,
+                    unlocked: false,
+                    gapStart: bridgeX,
+                    gapEnd: bridgeX + 150 + (i * 10)
+                });
+            }
+
+            levels.push(level);
+        }
+
+        // Utility functions
+        function clamp(value, min, max) {
+            return Math.min(Math.max(value, min), max);
+        }
+
+        function createEffect(x, y, type, color) {
+            if (!color) color = '#ffd700';
+            effects.push({
+                x: x,
+                y: y,
+                type: type,
+                color: color,
+                life: 1.0,
+                decay: 0.05,
+                velocityX: (Math.random() - 0.5) * 4,
+                velocityY: -Math.random() * 3 - 2,
+                size: 20
+            });
+        }
+
+        function updateEffects() {
+            for (var i = effects.length - 1; i >= 0; i--) {
+                var effect = effects[i];
+                effect.life -= effect.decay;
+                effect.x += effect.velocityX;
+                effect.y += effect.velocityY;
+                effect.velocityY += 0.2;
+                effect.size *= 0.98;
+                
+                if (effect.life <= 0) {
+                    effects.splice(i, 1);
+                }
+            }
+        }
+
+        function drawEffects() {
+            ctx.save();
+            for (var i = 0; i < effects.length; i++) {
+                var effect = effects[i];
+                ctx.globalAlpha = effect.life;
+                ctx.fillStyle = effect.color;
+                
+                if (effect.type === 'star') {
+                    ctx.save();
+                    ctx.translate(effect.x, effect.y);
+                    ctx.rotate(effect.life * Math.PI * 4);
+                    ctx.beginPath();
+                    for (var j = 0; j < 5; j++) {
+                        var angle = (j * 4 * Math.PI) / 5;
+                        var x = Math.cos(angle) * effect.size;
+                        var y = Math.sin(angle) * effect.size;
+                        if (j === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                    }
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.restore();
+                } else if (effect.type === 'sparkle') {
+                    ctx.fillRect(effect.x - effect.size/2, effect.y - effect.size/2, effect.size, effect.size);
+                }
+            }
+            ctx.restore();
+        }
+
+        // Stats tracking
+        var stats = {
+            jumps: 0,
+            deaths: 0,
+            trampolineBounces: 0,
+            goldStarsCollected: 0,
+            startTime: Date.now(),
+            endTime: null
+        };
+
+        // Enhanced save/load functions
+        function loadPersistentStats() {
+            // Load player profile
+            var savedProfile = StorageManager.load('playerProfile');
+            if (savedProfile && savedProfile.name) {
+                playerName = savedProfile.name;
+            }
+            
+            // Load game statistics
+            var savedStats = StorageManager.load('gameStats');
+            if (savedStats) {
+                // Merge saved stats with defaults
+                for (var key in savedStats) {
+                    if (persistentStats.hasOwnProperty(key)) {
+                        persistentStats[key] = savedStats[key];
+                    }
+                }
+            }
+            
+            // Ensure arrays exist
+            if (!persistentStats.levelsCompleted || persistentStats.levelsCompleted.length !== 12) {
+                persistentStats.levelsCompleted = [false,false,false,false,false,false,false,false,false,false,false,false];
+            }
+            if (!persistentStats.levelBestTimes || persistentStats.levelBestTimes.length !== 12) {
+                persistentStats.levelBestTimes = [null,null,null,null,null,null,null,null,null,null,null,null];
+            }
+            if (!persistentStats.levelAttempts || persistentStats.levelAttempts.length !== 12) {
+                persistentStats.levelAttempts = [0,0,0,0,0,0,0,0,0,0,0,0];
+            }
+            if (!persistentStats.customLevelsCompleted) {
+                persistentStats.customLevelsCompleted = [];
+            }
+            if (!persistentStats.achievements) {
+                persistentStats.achievements = {
+                    firstJump: false,
+                    firstDeath: false,
+                    firstCompletion: false,
+                    speedRunner: false,
+                    perfectionist: false,
+                    persistent: false,
+                    explorer: false,
+                    master: false,
+                    bouncer: false,
+                    starCollector: false,
+                    customChampion: false
+                };
+            }
+            
+            // Update last played and session start
+            persistentStats.lastPlayed = Date.now();
+            persistentStats.sessionStartTime = Date.now();
+        }
+
+        function savePersistentStats() {
+            // Update total play time
+            if (persistentStats.sessionStartTime) {
+                var sessionTime = Date.now() - persistentStats.sessionStartTime;
+                persistentStats.totalPlayTime += sessionTime;
+                persistentStats.sessionStartTime = Date.now();
+            }
+            
+            // Save player profile
+            StorageManager.save('playerProfile', {
+                name: playerName,
+                lastPlayed: Date.now(),
+                totalPlayTime: persistentStats.totalPlayTime
+            });
+            
+            // Save game statistics
+            StorageManager.save('gameStats', persistentStats);
+            
+            // Check for new achievements
+            AchievementManager.checkAchievements();
+        }
+
+        // Player profile management
+        function createPlayerProfile(name) {
+            playerName = name;
+            persistentStats.sessionStartTime = Date.now();
+            savePersistentStats();
+        }
+
+        function getPlayerProfile() {
+            return {
+                name: playerName,
+                totalDeaths: persistentStats.totalDeaths,
+                totalCompletions: persistentStats.totalCompletions,
+                totalJumps: persistentStats.totalJumps,
+                totalGoldStars: persistentStats.totalGoldStars,
+                totalPlayTime: persistentStats.totalPlayTime,
+                gamesPlayed: persistentStats.gamesPlayed,
+                lastPlayed: persistentStats.lastPlayed,
+                achievements: persistentStats.achievements,
+                levelsCompleted: persistentStats.levelsCompleted.filter(function(completed) { return completed; }).length,
+                bestOverallTime: persistentStats.bestTime
+            };
+        }
+
+        function resetPlayerData() {
+            if (confirm('Are you sure you want to reset ALL game data? This cannot be undone!')) {
+                StorageManager.clearAll();
+                
+                // Reset to defaults
+                playerName = '';
+                persistentStats = {
+                    totalDeaths: 0,
+                    totalCompletions: 0,
+                    totalJumps: 0,
+                    totalTrampolineBounces: 0,
+                    totalGoldStars: 0,
+                    bestTime: null,
+                    gamesPlayed: 0,
+                    levelsCompleted: [false,false,false,false,false,false,false,false,false,false,false,false],
+                    levelBestTimes: [null,null,null,null,null,null,null,null,null,null,null,null],
+                    levelAttempts: [0,0,0,0,0,0,0,0,0,0,0,0],
+                    customLevelsCompleted: [],
+                    achievements: {
+                        firstJump: false,
+                        firstDeath: false,
+                        firstCompletion: false,
+                        speedRunner: false,
+                        perfectionist: false,
+                        persistent: false,
+                        explorer: false,
+                        master: false,
+                        bouncer: false,
+                        starCollector: false,
+                        customChampion: false
+                    },
+                    totalPlayTime: 0,
+                    sessionStartTime: Date.now(),
+                    lastPlayed: Date.now()
+                };
+                
+                showNameInput();
+                alert('All game data has been reset!');
+            }
+        }
+
+        // Game mechanics
+        function checkSlopeCollision(slope) {
+            if (player.x + player.width > slope.x && player.x < slope.x + slope.width) {
+                var relativeX = (player.x + player.width/2) - slope.x;
+                var slopeProgress = clamp(relativeX / slope.width, 0, 1);
+                var radians = (slope.angle * Math.PI) / 180;
+                
+                var slopeY;
+                if (slope.angle > 0) {
+                    slopeY = slope.y - (slopeProgress * Math.abs(Math.sin(radians)) * slope.width);
+                } else {
+                    slopeY = slope.y - ((1 - slopeProgress) * Math.abs(Math.sin(radians)) * slope.width);
+                }
+                
+                var tolerance = 25;
+                if (player.y + player.height >= slopeY - tolerance && 
+                    player.y + player.height <= slopeY + tolerance && 
+                    player.velocityY >= 0) {
+                    
+                    player.y = slopeY - player.height;
+                    player.onSlope = true;
+                    player.slopeAngle = slope.angle;
+                    player.onGround = true;
+                    player.velocityY = 0;
+                    
+                    var slopeFactor = Math.abs(slope.angle) / 45;
+                    if (slope.angle > 0) {
+                        player.velocityX = 3 - (slopeFactor * 1.5);
+                    } else {
+                        player.velocityX = 3 + (slopeFactor * 2);
+                    }
+                    
+                    player.velocityX = clamp(player.velocityX, 1, 6);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function checkGoldStarCollision(goldStar) {
+            if (!goldStar.collected) {
+                var dx = (player.x + player.width/2) - goldStar.x;
+                var dy = (player.y + player.height/2) - goldStar.y;
+                var distance = Math.sqrt(dx*dx + dy*dy);
+                
+                if (distance < 25) {
+                    goldStar.collected = true;
+                    stats.goldStarsCollected++;
+                    persistentStats.totalGoldStars++;
+                    
+                    for (var i = 0; i < 8; i++) {
+                        createEffect(goldStar.x, goldStar.y, 'star', '#ffd700');
+                        createEffect(goldStar.x, goldStar.y, 'sparkle', '#ffff00');
+                    }
+                    
+                    updateBridges();
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function updateBridges() {
+            var level = levels[currentLevel];
+            var requiredStars = level.goldStarsRequired || 1;
+            var collectedStars = 0;
+            
+            for (var i = 0; i < level.goldStars.length; i++) {
+                if (level.goldStars[i].collected) collectedStars++;
+            }
+            
+            if (level.bridges) {
+                for (var i = 0; i < level.bridges.length; i++) {
+                    var bridge = level.bridges[i];
+                    var wasUnlocked = bridge.unlocked;
+                    var starsNeeded = Math.ceil(requiredStars * (i + 1) / level.bridges.length);
+                    bridge.unlocked = collectedStars >= starsNeeded;
+                    
+                    if (!wasUnlocked && bridge.unlocked) {
+                        for (var j = 0; j < 12; j++) {
+                            createEffect(
+                                bridge.x + Math.random() * bridge.width, 
+                                bridge.y, 
+                                'sparkle', 
+                                '#8B4513'
+                            );
+                        }
+                    }
+                }
+            }
+        }
+
+        function canCrossBridge() {
+            var level = levels[currentLevel];
+            if (level.bridges) {
+                for (var i = 0; i < level.bridges.length; i++) {
+                    var bridge = level.bridges[i];
+                    if (player.x + player.width/2 >= bridge.gapStart && 
+                        player.x + player.width/2 <= bridge.gapEnd) {
+                        
+                        if (player.y + player.height >= bridge.y - 10 && 
+                            player.y + player.height <= bridge.y + bridge.height + 20) {
+                            return bridge.unlocked;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+        // UI Management
+        function showNameInput() {
+            currentGameState = GameState.NAME_INPUT;
+            document.getElementById('nameInput').style.display = 'block';
+            document.getElementById('levelSelect').style.display = 'none';
+            document.getElementById('customSelect').style.display = 'none';
+            document.getElementById('profileScreen').style.display = 'none';
+            document.getElementById('gameControls').style.display = 'none';
+            document.getElementById('restartButton').style.display = 'none';
+            document.getElementById('homeButton').style.display = 'none';
+            document.getElementById('jumpButton').style.display = 'none';
+        }
+
+        function showLevelSelect() {
+            currentGameState = GameState.LEVEL_SELECT;
+            document.getElementById('nameInput').style.display = 'none';
+            document.getElementById('levelSelect').style.display = 'block';
+            document.getElementById('customSelect').style.display = 'none';
+            document.getElementById('profileScreen').style.display = 'none';
+            document.getElementById('gameControls').style.display = 'none';
+            document.getElementById('restartButton').style.display = 'none';
+            document.getElementById('homeButton').style.display = 'none';
+            document.getElementById('jumpButton').style.display = 'none';
+            
+            document.getElementById('welcomeMessage').textContent = 'Welcome back, ' + playerName + '! 🚀';
+            updateLevelGrid();
+        }
+
+        function showCustomSelect() {
+            currentGameState = GameState.CUSTOM_SELECT;
+            document.getElementById('nameInput').style.display = 'none';
+            document.getElementById('levelSelect').style.display = 'none';
+            document.getElementById('customSelect').style.display = 'block';
+            document.getElementById('profileScreen').style.display = 'none';
+            document.getElementById('gameControls').style.display = 'none';
+            document.getElementById('restartButton').style.display = 'none';
+            document.getElementById('homeButton').style.display = 'none';
+            document.getElementById('jumpButton').style.display = 'none';
+            
+            updateCustomGrid();
+        }
+
+        function showProfile() {
+            document.getElementById('nameInput').style.display = 'none';
+            document.getElementById('levelSelect').style.display = 'none';
+            document.getElementById('customSelect').style.display = 'none';
+            document.getElementById('profileScreen').style.display = 'block';
+            document.getElementById('gameControls').style.display = 'none';
+            document.getElementById('restartButton').style.display = 'none';
+            document.getElementById('homeButton').style.display = 'none';
+            document.getElementById('jumpButton').style.display = 'none';
+            
+            updateProfileDisplay();
+        }
+
+        function showGameplay() {
+            currentGameState = GameState.PLAYING;
+            document.getElementById('nameInput').style.display = 'none';
+            document.getElementById('levelSelect').style.display = 'none';
+            document.getElementById('customSelect').style.display = 'none';
+            document.getElementById('profileScreen').style.display = 'none';
+            document.getElementById('gameControls').style.display = 'block';
+            document.getElementById('restartButton').style.display = 'block';
+            document.getElementById('homeButton').style.display = 'block';
+            document.getElementById('jumpButton').style.display = 'block';
+        }
+
+        function updateProfileDisplay() {
+            var profile = getPlayerProfile();
+            var content = document.getElementById('profileContent');
+            
+            // Calculate play time
+            var totalMinutes = Math.floor(profile.totalPlayTime / 60000);
+            var hours = Math.floor(totalMinutes / 60);
+            var minutes = totalMinutes % 60;
+            var playTimeText = hours > 0 ? hours + 'h ' + minutes + 'm' : minutes + 'm';
+            
+            // Count achievements
+            var achievementCount = 0;
+            var totalAchievements = 0;
+            for (var key in profile.achievements) {
+                totalAchievements++;
+                if (profile.achievements[key]) {
+                    achievementCount++;
+                }
+            }
+            
+            content.innerHTML = `
+                <div style="background: rgba(255,215,0,0.1); padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                    <h2 style="color: #ffd700; margin-top: 0;">🚀 ${profile.name}</h2>
+                    <p style="font-size: 16px; margin: 5px 0;"><strong>Total Play Time:</strong> ${playTimeText}</p>
+                    <p style="font-size: 16px; margin: 5px 0;"><strong>Last Played:</strong> ${new Date(profile.lastPlayed).toLocaleDateString()}</p>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                    <div style="background: rgba(0,255,136,0.1); padding: 15px; border-radius: 8px;">
+                        <h3 style="color: #00ff88; margin-top: 0;">🏆 Progress</h3>
+                        <p><strong>Planets Conquered:</strong> ${profile.levelsCompleted}/12</p>
+                        <p><strong>Custom Levels:</strong> ${persistentStats.customLevelsCompleted.length}</p>
+                        <p><strong>Best Time:</strong> ${profile.bestOverallTime ? profile.bestOverallTime.toFixed(1) + 's' : 'None'}</p>
+                    </div>
+                    
+                    <div style="background: rgba(233,69,96,0.1); padding: 15px; border-radius: 8px;">
+                        <h3 style="color: #e94560; margin-top: 0;">📊 Statistics</h3>
+                        <p><strong>Total Jumps:</strong> ${profile.totalJumps.toLocaleString()}</p>
+                        <p><strong>Total Deaths:</strong> ${profile.totalDeaths.toLocaleString()}</p>
+                        <p><strong>Games Played:</strong> ${profile.gamesPlayed.toLocaleString()}</p>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(255,170,0,0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <h3 style="color: #ffaa00; margin-top: 0;">⭐ Collection Stats</h3>
+                    <p><strong>Gold Stars Collected:</strong> ${profile.totalGoldStars}</p>
+                    <p><strong>Trampoline Bounces:</strong> ${persistentStats.totalTrampolineBounces}</p>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                    <h3 style="color: #ffffff; margin-top: 0;">🏅 Achievements (${achievementCount}/${totalAchievements})</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 10px;">
+                        ${generateAchievementHTML(profile.achievements)}
+                    </div>
+                </div>
+            `;
+        }
+
+        function generateAchievementHTML(achievements) {
+            var achievementData = {
+                firstJump: { title: "First Steps", desc: "Take your first jump!", icon: "👟" },
+                firstDeath: { title: "Learning Experience", desc: "Experience your first setback", icon: "💀" },
+                firstCompletion: { title: "Planet Conqueror", desc: "Complete your first level!", icon: "🌍" },
+                speedRunner: { title: "Speed Demon", desc: "Complete a level in under 30 seconds!", icon: "⚡" },
+                perfectionist: { title: "Star Master", desc: "Collect all stars in a level!", icon: "⭐" },
+                persistent: { title: "Never Give Up", desc: "Die 100 times - persistence pays off!", icon: "💪" },
+                explorer: { title: "Space Explorer", desc: "Complete 5 different planets!", icon: "🚀" },
+                master: { title: "Solar System Master", desc: "Conquer all planets!", icon: "👑" },
+                bouncer: { title: "Trampoline Champion", desc: "Use 50 trampolines!", icon: "🤸" },
+                starCollector: { title: "Stellar Collector", desc: "Collect 25 gold stars!", icon: "✨" },
+                customChampion: { title: "Community Hero", desc: "Complete a custom level!", icon: "🎨" }
+            };
+            
+            var html = '';
+            for (var key in achievementData) {
+                var achievement = achievementData[key];
+                var unlocked = achievements[key];
+                var className = unlocked ? 'achievement-unlocked' : 'achievement-locked';
+                var opacity = unlocked ? '1' : '0.4';
+                
+                html += `
+                    <div style="background: ${unlocked ? 'rgba(255,215,0,0.2)' : 'rgba(128,128,128,0.2)'}; 
+                                padding: 10px; border-radius: 5px; opacity: ${opacity};">
+                        <div style="font-size: 20px; margin-bottom: 5px;">${achievement.icon}</div>
+                        <div style="font-weight: bold; font-size: 12px; color: ${unlocked ? '#ffd700' : '#888'};">
+                            ${achievement.title}
+                        </div>
+                        <div style="font-size: 10px; color: ${unlocked ? '#fff' : '#aaa'};">
+                            ${achievement.desc}
+                        </div>
+                    </div>
+                `;
+            }
+            return html;
+        }
+
+        function updateLevelGrid() {
+            var grid = document.getElementById('levelGrid');
+            grid.innerHTML = '';
+            
+            for (var i = 0; i < levels.length; i++) {
+                var level = levels[i];
+                var card = document.createElement('div');
+                card.className = 'level-card';
+                
+                var isCompleted = persistentStats.levelsCompleted[i];
+                var isLocked = i > 0 && !persistentStats.levelsCompleted[i - 1];
+                
+                if (isCompleted) card.classList.add('completed');
+                if (isLocked) card.classList.add('locked');
+                
+                var bestTime = persistentStats.levelBestTimes[i];
+                var bestTimeText = bestTime ? '⏱️ ' + bestTime.toFixed(1) + 's' : '';
+                var bridgeCount = level.bridges ? level.bridges.length : 0;
+                var goldStarCount = level.goldStars ? level.goldStars.length : 0;
+                
+                var stars = '';
+                for (var s = 0; s < level.difficulty; s++) {
+                    stars += '⭐';
+                }
+                
+                card.innerHTML = 
+                    '<h3>' + level.emoji + ' ' + level.name + '</h3>' +
+                    '<p style="font-size: 11px; opacity: 0.8;">' + level.description + '</p>' +
+                    '<p style="font-size: 13px;">Difficulty: ' + stars + '</p>' +
+                    '<p style="font-size: 12px; color: #ffd700;">⭐ ' + goldStarCount + ' Stars | 🌉 ' + bridgeCount + ' Bridges</p>' +
+                    '<p style="color: #00aaff; font-size: 11px;">🔼 Slopes & Strategy</p>' +
+                    '<p style="color: #ffd700; font-size: 11px;">' + bestTimeText + '</p>' +
+                    '<p style="color: ' + (isCompleted ? '#00ff88' : (isLocked ? '#666' : '#fff')) + '; font-size: 12px;">' +
+                        (isCompleted ? '✅ Conquered' : (isLocked ? '🔒 Locked' : '▶️ Launch Mission')) +
+                    '</p>';
+                
+                if (!isLocked) {
+                    (function(levelIndex) {
+                        card.addEventListener('click', function() {
+                            startLevel(levelIndex);
+                        });
+                    })(i);
+                }
+                
+                grid.appendChild(card);
+            }
+        }
+
+        function startGame() {
+            var nameInput = document.getElementById('playerNameInput').value.trim();
+            if (!nameInput) {
+                alert('Please enter your name!');
+                return;
+            }
+            
+            playerName = nameInput;
+            savePersistentStats();
+            showLevelSelect();
+        }
+
+        function updateCustomGrid() {
+            var grid = document.getElementById('customGrid');
+            grid.innerHTML = '';
+            
+            for (var i = 0; i < customLevels.length; i++) {
+                var level = customLevels[i];
+                var card = document.createElement('div');
+                card.className = 'level-card';
+                
+                var bridgeCount = level.bridges ? level.bridges.length : 0;
+                var goldStarCount = level.goldStars ? level.goldStars.length : 0;
+                
+                var stars = '';
+                for (var s = 0; s < level.difficulty; s++) {
+                    stars += '⭐';
+                }
+                
+                card.innerHTML = 
+                    '<h3>' + level.emoji + ' ' + level.name + '</h3>' +
+                    '<p style="font-size: 11px; opacity: 0.8;">' + level.description + '</p>' +
+                    '<p style="font-size: 13px;">Difficulty: ' + stars + '</p>' +
+                    '<p style="font-size: 12px; color: #ffd700;">⭐ ' + goldStarCount + ' Stars | 🌉 ' + bridgeCount + ' Bridges</p>' +
+                    '<p style="color: #e94560; font-size: 11px;">🎨 Community Created</p>' +
+                    '<p style="color: #fff; font-size: 12px;">▶️ Play Custom Level</p>';
+                
+                (function(levelIndex) {
+                    card.addEventListener('click', function() {
+                        startCustomLevel(levelIndex);
+                    });
+                })(i);
+                
+                grid.appendChild(card);
+            }
+        }
+
+        function startLevel(levelIndex) {
+            currentLevel = levelIndex;
+            currentLevelSet = 'main';
+            gameRunning = true;
+            gameWon = false;
+            
+            player.x = 100;
+            player.y = 400;
+            player.velocityY = 0;
+            player.jumpChargeTime = 0;
+            player.doubleJumpAvailable = true;
+            player.onSlope = false;
+            player.slopeAngle = 0;
+            camera.x = 0;
+            spacePressed = false;
+            
+            var level = levels[currentLevel];
+            if (level.goldStars) {
+                for (var i = 0; i < level.goldStars.length; i++) {
+                    level.goldStars[i].collected = false;
+                }
+            }
+            if (level.bridges) {
+                for (var i = 0; i < level.bridges.length; i++) {
+                    level.bridges[i].unlocked = false;
+                }
+            }
+            
+            stats = {
+                jumps: 0,
+                deaths: 0,
+                trampolineBounces: 0,
+                goldStarsCollected: 0,
+                startTime: Date.now(),
+                endTime: null
+            };
+            
+            persistentStats.gamesPlayed++;
+            savePersistentStats();
+            
+            showGameplay();
+            updateButtonStates();
+        }
+
+        function startCustomLevel(levelIndex) {
+            currentLevel = levelIndex;
+            currentLevelSet = 'custom';
+            gameRunning = true;
+            gameWon = false;
+            
+            player.x = 100;
+            player.y = 400;
+            player.velocityY = 0;
+            player.jumpChargeTime = 0;
+            player.doubleJumpAvailable = true;
+            player.onSlope = false;
+            player.slopeAngle = 0;
+            camera.x = 0;
+            spacePressed = false;
+            
+            var level = customLevels[currentLevel];
+            if (level.goldStars) {
+                for (var i = 0; i < level.goldStars.length; i++) {
+                    level.goldStars[i].collected = false;
+                }
+            }
+            if (level.bridges) {
+                for (var i = 0; i < level.bridges.length; i++) {
+                    level.bridges[i].unlocked = false;
+                }
+            }
+            
+            stats = {
+                jumps: 0,
+                deaths: 0,
+                trampolineBounces: 0,
+                goldStarsCollected: 0,
+                startTime: Date.now(),
+                endTime: null
+            };
+            
+            persistentStats.gamesPlayed++;
+            savePersistentStats();
+            
+            showGameplay();
+            updateButtonStates();
+        }
+
+        function getCurrentLevel() {
+            return currentLevelSet === 'custom' ? customLevels[currentLevel] : levels[currentLevel];
+        }
+
+        function restartGame() {
+            if (currentLevelSet === 'custom') {
+                startCustomLevel(currentLevel);
+            } else {
+                startLevel(currentLevel);
+            }
+        }
+
+        function backToLevelSelect() {
+            if (currentLevelSet === 'custom') {
+                showCustomSelect();
+            } else {
+                showLevelSelect();
+            }
+        }
+
+        function completeLevel() {
+            gameWon = true;
+            gameRunning = false;
+            stats.endTime = Date.now();
+            
+            persistentStats.totalCompletions++;
+            persistentStats.levelsCompleted[currentLevel] = true;
+            
+            var completionTime = (stats.endTime - stats.startTime) / 1000;
+            if (!persistentStats.levelBestTimes[currentLevel] || completionTime < persistentStats.levelBestTimes[currentLevel]) {
+                persistentStats.levelBestTimes[currentLevel] = completionTime;
+            }
+            
+            if (!persistentStats.bestTime || completionTime < persistentStats.bestTime) {
+                persistentStats.bestTime = completionTime;
+            }
+            
+            savePersistentStats();
+            updateButtonStates();
+        }
+
+        function updateButtonStates() {
+            var restartBtn = document.getElementById('restartButton');
+            var homeBtn = document.getElementById('homeButton');
+            
+            if (gameWon) {
+                restartBtn.textContent = 'Replay';
+                if (currentLevel < levels.length - 1) {
+                    homeBtn.textContent = 'Next >';
+                    homeBtn.style.background = '#00ff88';
+                } else {
+                    homeBtn.textContent = 'Home';
+                    homeBtn.style.background = '#16213e';
+                }
+            } else if (!gameRunning) {
+                restartBtn.textContent = 'Restart';
+                homeBtn.textContent = 'Home';
+                homeBtn.style.background = '#16213e';
+            } else {
+                restartBtn.textContent = 'Restart';
+                homeBtn.textContent = 'Home';
+                homeBtn.style.background = '#16213e';
+            }
+        }
+
+        // Input handling
+        function handleJumpStart() {
+            if (!spacePressed && gameRunning) {
+                if (player.onGround) {
+                    player.velocityY = player.minJumpPower;
+                    player.onGround = false;
+                    player.doubleJumpAvailable = true;
+                    player.jumpChargeTime = 0;
+                    stats.jumps++;
+                    persistentStats.totalJumps++;
+                } else if (player.doubleJumpAvailable) {
+                    player.velocityY = player.minJumpPower;
+                    player.doubleJumpAvailable = false;
+                    player.jumpChargeTime = 0;
+                    stats.jumps++;
+                    persistentStats.totalJumps++;
+                }
+            }
+            spacePressed = true;
+        }
+
+        function handleJumpEnd() {
+            spacePressed = false;
+            player.jumpChargeTime = 0;
+        }
+
+        // Game loop with enhanced mobile performance
+        function updatePlayer() {
+            if (!gameRunning || currentGameState !== GameState.PLAYING) return;
+            
+            player.onSlope = false;
+            player.velocityX = 3;
+            
+            if (spacePressed && player.velocityY < 0 && player.jumpChargeTime < player.maxChargeTime) {
+                player.jumpChargeTime++;
+                var chargeRatio = player.jumpChargeTime / player.maxChargeTime;
+                var additionalPower = (player.maxJumpPower - player.minJumpPower) * chargeRatio;
+                var targetVelocity = player.minJumpPower + additionalPower;
+                
+                if (player.velocityY > targetVelocity) {
+                    player.velocityY += (targetVelocity - player.velocityY) * 0.3;
+                }
+            }
+
+            var skyLimit = -50;
+            if (player.y < skyLimit) {
+                player.velocityY = Math.max(player.velocityY, 2);
+                player.doubleJumpAvailable = false;
+                player.jumpChargeTime = 0;
+            }
+
+            player.velocityY += player.gravity;
+            player.x += player.velocityX;
+            player.y += player.velocityY;
+            camera.x = player.x - canvas.width / 3;
+
+            var level = getCurrentLevel();
+
+            // Check slope collisions
+            player.onGround = false;
+            if (level.slopes && level.slopes.length > 0) {
+                for (var i = 0; i < level.slopes.length; i++) {
+                    if (checkSlopeCollision(level.slopes[i])) {
+                        break;
+                    }
+                }
+            }
+
+            // Check platform collisions
+            if (!player.onSlope) {
+                for (var i = 0; i < level.platforms.length; i++) {
+                    var platform = level.platforms[i];
+                    if (player.x < platform.x + platform.width &&
+                        player.x + player.width > platform.x &&
+                        player.y < platform.y + platform.height &&
+                        player.y + player.height > platform.y) {
+                        
+                        if (player.velocityY > 0 && player.y < platform.y) {
+                            player.y = platform.y - player.height;
+                            player.velocityY = 0;
+                            player.onGround = true;
+                            player.doubleJumpAvailable = true;
+                        }
+                        else if (player.velocityY < 0 && player.y > platform.y) {
+                            player.y = platform.y + platform.height;
+                            player.velocityY = 0;
+                        }
+                        else if (player.velocityY >= 0) {
+                            if (player.x < platform.x) {
+                                player.x = platform.x - player.width;
+                            } else {
+                                player.x = platform.x + platform.width;
+                            }
+                        }
+                    }
+                }
+                
+                // Check bridge platforms
+                if (level.bridges) {
+                    for (var i = 0; i < level.bridges.length; i++) {
+                        var bridge = level.bridges[i];
+                        if (bridge.unlocked) {
+                            if (player.x < bridge.x + bridge.width &&
+                                player.x + player.width > bridge.x &&
+                                player.y < bridge.y + bridge.height &&
+                                player.y + player.height > bridge.y) {
+                                
+                                if (player.velocityY > 0 && player.y < bridge.y) {
+                                    player.y = bridge.y - player.height;
+                                    player.velocityY = 0;
+                                    player.onGround = true;
+                                    player.doubleJumpAvailable = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Check gold star collisions
+            if (level.goldStars) {
+                for (var i = 0; i < level.goldStars.length; i++) {
+                    checkGoldStarCollision(level.goldStars[i]);
+                }
+            }
+
+            // Check bridge gaps
+            if (!canCrossBridge()) {
+                if (player.velocityY >= 0) {
+                    player.velocityY += 2;
+                }
+            }
+
+            // Check spike collisions
+            for (var i = 0; i < level.spikes.length; i++) {
+                var spike = level.spikes[i];
+                if (player.x < spike.x + spike.width &&
+                    player.x + player.width > spike.x &&
+                    player.y < spike.y + spike.height &&
+                    player.y + player.height > spike.y) {
+                    stats.deaths++;
+                    persistentStats.totalDeaths++;
+                    if (currentLevelSet === 'main') {
+                        persistentStats.levelAttempts[currentLevel]++;
+                    }
+                    savePersistentStats();
+                    gameRunning = false;
+                    updateButtonStates();
+                }
+            }
+
+            // Check trampoline collisions
+            if (level.trampolines) {
+                for (var i = 0; i < level.trampolines.length; i++) {
+                    var trampoline = level.trampolines[i];
+                    var dx = (player.x + player.width/2) - trampoline.x;
+                    var dy = (player.y + player.height/2) - trampoline.y;
+                    var distance = Math.sqrt(dx*dx + dy*dy);
+                    
+                    if (distance < trampoline.radius + player.width/2) {
+                        if (player.velocityY > 0 && player.y < trampoline.y) {
+                            player.velocityY = -25;
+                            player.doubleJumpAvailable = true;
+                            player.jumpChargeTime = 0;
+                            stats.trampolineBounces++;
+                            persistentStats.totalTrampolineBounces++;
+                        }
+                    }
+                }
+            }
+
+            // Check finish line
+            if (player.x >= level.length - 200) {
+                completeLevel();
+            }
+
+            // Death if falling too far
+            if (player.y > canvas.height + 100) {
+                stats.deaths++;
+                persistentStats.totalDeaths++;
+                if (currentLevelSet === 'main') {
+                    persistentStats.levelAttempts[currentLevel]++;
+                }
+                savePersistentStats();
+                gameRunning = false;
+                updateButtonStates();
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (currentGameState !== GameState.PLAYING) {
+                ctx.fillStyle = '#0f3460';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = '#ffffff';
+                for (var i = 0; i < 100; i++) {
+                    var x = (i * 47 + Date.now() * 0.01) % canvas.width;
+                    var y = (i * 73) % canvas.height;
+                    ctx.fillRect(x, y, 2, 2);
+                }
+                return;
+            }
+
+            var level = getCurrentLevel();
+
+            ctx.save();
+            ctx.translate(-camera.x, -camera.y);
+
+            // Draw platforms
+            ctx.fillStyle = '#16213e';
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2;
+            for (var i = 0; i < level.platforms.length; i++) {
+                var platform = level.platforms[i];
+                ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
+                ctx.strokeRect(platform.x, platform.y, platform.width, platform.height);
+            }
+
+            // Draw slopes
+            if (level.slopes) {
+                ctx.fillStyle = currentLevelSet === 'custom' ? '#e94560' : '#2a2a3e';
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 2;
+                for (var i = 0; i < level.slopes.length; i++) {
+                    var slope = level.slopes[i];
+                    ctx.save();
+                    ctx.translate(slope.x + slope.width/2, slope.y);
+                    ctx.rotate((slope.angle * Math.PI) / 180);
+                    ctx.fillRect(-slope.width/2, -slope.height/2, slope.width, slope.height);
+                    ctx.strokeRect(-slope.width/2, -slope.height/2, slope.width, slope.height);
+                    ctx.restore();
+                    
+                    ctx.fillStyle = slope.angle > 0 ? '#00ff88' : '#ff8800';
+                    ctx.font = '12px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(Math.abs(slope.angle) + '°', slope.x + slope.width/2, slope.y - slope.height - 5);
+                }
+            }
+
+            // Draw spikes
+            ctx.fillStyle = currentLevelSet === 'custom' ? '#ff6b6b' : '#e94560';
+            for (var i = 0; i < level.spikes.length; i++) {
+                var spike = level.spikes[i];
+                ctx.beginPath();
+                ctx.moveTo(spike.x + spike.width/2, spike.y);
+                ctx.lineTo(spike.x, spike.y + spike.height);
+                ctx.lineTo(spike.x + spike.width, spike.y + spike.height);
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+            }
+
+            // Draw trampolines
+            if (level.trampolines) {
+                ctx.fillStyle = currentLevelSet === 'custom' ? '#00d4ff' : '#00aaff';
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 3;
+                for (var i = 0; i < level.trampolines.length; i++) {
+                    var trampoline = level.trampolines[i];
+                    ctx.beginPath();
+                    ctx.arc(trampoline.x, trampoline.y, trampoline.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.stroke();
+                    
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = '12px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('↑', trampoline.x, trampoline.y + 3);
+                    ctx.fillStyle = currentLevelSet === 'custom' ? '#00d4ff' : '#00aaff';
+                }
+            }
+
+            // Draw gold stars
+            if (level.goldStars) {
+                ctx.fillStyle = currentLevelSet === 'custom' ? '#ffeb3b' : '#ffd700';
+                ctx.strokeStyle = '#ffaa00';
+                ctx.lineWidth = 2;
+                for (var i = 0; i < level.goldStars.length; i++) {
+                    var goldStar = level.goldStars[i];
+                    if (!goldStar.collected) {
+                        ctx.save();
+                        ctx.translate(goldStar.x, goldStar.y);
+                        ctx.rotate((Date.now() * 0.01) % (Math.PI * 2));
+                        ctx.beginPath();
+                        for (var j = 0; j < 5; j++) {
+                            var outerAngle = (j * 4 * Math.PI) / 5;
+                            var innerAngle = ((j * 4 + 2) * Math.PI) / 5;
+                            var outerX = Math.cos(outerAngle) * 15;
+                            var outerY = Math.sin(outerAngle) * 15;
+                            var innerX = Math.cos(innerAngle) * 7;
+                            var innerY = Math.sin(innerAngle) * 7;
+                            
+                            if (j === 0) ctx.moveTo(outerX, outerY);
+                            else ctx.lineTo(outerX, outerY);
+                            ctx.lineTo(innerX, innerY);
+                        }
+                        ctx.closePath();
+                        ctx.fill();
+                        ctx.stroke();
+                        ctx.restore();
+                    }
+                }
+            }
+
+            // Draw bridges
+            if (level.bridges) {
+                for (var i = 0; i < level.bridges.length; i++) {
+                    var bridge = level.bridges[i];
+                    if (bridge.unlocked) {
+                        ctx.fillStyle = currentLevelSet === 'custom' ? '#8B4513' : '#8B4513';
+                        ctx.strokeStyle = '#A0522D';
+                        ctx.lineWidth = 3;
+                        ctx.fillRect(bridge.x, bridge.y, bridge.width, bridge.height);
+                        ctx.strokeRect(bridge.x, bridge.y, bridge.width, bridge.height);
+                        
+                        ctx.fillStyle = '#654321';
+                        ctx.fillRect(bridge.x + 10, bridge.y, 8, 40);
+                        ctx.fillRect(bridge.x + bridge.width - 18, bridge.y, 8, 40);
+                        
+                        ctx.strokeStyle = '#A0522D';
+                        ctx.lineWidth = 2;
+                        for (var j = 20; j < bridge.width - 20; j += 15) {
+                            ctx.beginPath();
+                            ctx.moveTo(bridge.x + j, bridge.y);
+                            ctx.lineTo(bridge.x + j, bridge.y + bridge.height);
+                            ctx.stroke();
+                        }
+                    } else {
+                        ctx.strokeStyle = '#666666';
+                        ctx.lineWidth = 2;
+                        ctx.setLineDash([10, 5]);
+                        ctx.strokeRect(bridge.x, bridge.y, bridge.width, bridge.height);
+                        ctx.setLineDash([]);
+                        
+                        ctx.fillStyle = '#ff4444';
+                        ctx.font = '20px Arial';
+                        ctx.textAlign = 'center';
+                        ctx.fillText('🔒', bridge.x + bridge.width/2, bridge.y - 10);
+                        
+                        var bridgeIndex = i;
+                        var starsNeeded = Math.ceil(level.goldStarsRequired * (bridgeIndex + 1) / level.bridges.length);
+                        var collectedStars = 0;
+                        for (var k = 0; k < level.goldStars.length; k++) {
+                            if (level.goldStars[k].collected) collectedStars++;
+                        }
+                        
+                        ctx.fillStyle = '#ffffff';
+                        ctx.font = '12px Arial';
+                        ctx.fillText(collectedStars + '/' + starsNeeded + ' ⭐', bridge.x + bridge.width/2, bridge.y + 30);
+                    }
+                }
+            }
+
+            // Draw finish line and victory text
+            var finishX = level.length - 200;
+            ctx.fillStyle = currentLevelSet === 'custom' ? '#e94560' : '#00ff00';
+            ctx.fillRect(finishX, 0, 50, canvas.height);
+            
+            ctx.fillStyle = '#ffff00';
+            ctx.strokeStyle = '#ff0000';
+            ctx.lineWidth = 3;
+            ctx.font = 'bold 48px monospace';
+            ctx.textAlign = 'center';
+            
+            var nameTextX = finishX + 25;
+            var nameTextY = 150;
+            
+            ctx.strokeText(playerName.toUpperCase(), nameTextX, nameTextY);
+            ctx.fillText(playerName.toUpperCase(), nameTextX, nameTextY);
+            ctx.strokeText('WINS', nameTextX, nameTextY + 60);
+            ctx.fillText('WINS', nameTextX, nameTextY + 60);
+
+            // Draw player
+            ctx.fillStyle = gameRunning ? player.color : '#666666';
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+            ctx.strokeRect(player.x, player.y, player.width, player.height);
+
+            // Draw visual effects
+            drawEffects();
+
+            ctx.restore();
+            
+            // Draw UI (same as original but optimized for mobile)
+            if (!gameRunning) {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.textAlign = 'center';
+                
+                if (gameWon) {
+                    var collectedStars = 0;
+                    var totalStars = 0;
+                    if (level.goldStars) {
+                        totalStars = level.goldStars.length;
+                        for (var i = 0; i < level.goldStars.length; i++) {
+                            if (level.goldStars[i].collected) collectedStars++;
+                        }
+                    }
+                    var perfectStars = collectedStars === totalStars;
+                    
+                    ctx.fillStyle = currentLevelSet === 'custom' ? '#e94560' : '#00ff00';
+                    ctx.font = isMobile() ? '32px Arial' : '48px Arial';
+                    var levelTypeText = currentLevelSet === 'custom' ? 'COMPLETES' : 'CONQUERS';
+                    ctx.fillText(playerName.toUpperCase() + ' ' + levelTypeText + ' ' + level.name.toUpperCase() + '!', canvas.width/2, canvas.height/2 - 170);
+                    
+                    var timeMs = stats.endTime - stats.startTime;
+                    var timeSeconds = (timeMs / 1000).toFixed(1);
+                    
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = isMobile() ? '18px Arial' : '24px Arial';
+                    var completionText = currentLevelSet === 'custom' ? 'Custom Level Completed in: ' : 'Planet Conquered in: ';
+                    ctx.fillText(completionText + timeSeconds + 's', canvas.width/2, canvas.height/2 - 120);
+                    
+                    ctx.fillStyle = perfectStars ? '#ffd700' : '#ffffff';
+                    ctx.fillText('⭐ Gold Stars: ' + collectedStars + '/' + totalStars + (perfectStars ? ' (Perfect!)' : ''), canvas.width/2, canvas.height/2 - 90);
+                    
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillText('Jumps: ' + stats.jumps + ' | Bounces: ' + stats.trampolineBounces + ' | Deaths: ' + stats.deaths, canvas.width/2, canvas.height/2 - 60);
+                    
+                    if (currentLevelSet === 'main') {
+                        ctx.fillStyle = '#ffd700';
+                        ctx.font = isMobile() ? '16px Arial' : '20px Arial';
+                        ctx.fillText('🏆 Total Planets Conquered: ' + persistentStats.totalCompletions, canvas.width/2, canvas.height/2 - 20);
+                        ctx.fillText('💀 Total Deaths: ' + persistentStats.totalDeaths, canvas.width/2, canvas.height/2 + 5);
+                        
+                        if (persistentStats.levelBestTimes[currentLevel]) {
+                            var isNewRecord = timeSeconds == persistentStats.levelBestTimes[currentLevel].toFixed(1);
+                            ctx.fillStyle = isNewRecord ? '#ff0000' : '#ffd700';
+                            ctx.fillText((isNewRecord ? '🔥 NEW RECORD! ' : '⚡ Best Time: ') + persistentStats.levelBestTimes[currentLevel].toFixed(1) + 's', canvas.width/2, canvas.height/2 + 30);
+                        }
+                        
+                        ctx.fillStyle = '#ffffff';
+                        ctx.font = isMobile() ? '14px Arial' : '18px Arial';
+                        
+                        if (currentLevel < levels.length - 1) {
+                            ctx.fillStyle = '#00ff88';
+                            ctx.font = isMobile() ? '18px Arial' : '24px Arial';
+                            ctx.fillText('🚀 RESTART: Replay ' + level.name, canvas.width/2, canvas.height/2 + 80);
+                            ctx.fillText('🌟 HOME: Next Mission - ' + levels[currentLevel + 1].emoji + ' ' + levels[currentLevel + 1].name, canvas.width/2, canvas.height/2 + 110);
+                            
+                            ctx.fillStyle = '#cccccc';
+                            ctx.font = isMobile() ? '12px Arial' : '16px Arial';
+                            ctx.fillText('Use the buttons above ↗️ or tap screen for quick next level!', canvas.width/2, canvas.height/2 + 140);
+                        } else {
+                            ctx.fillStyle = '#ffd700';
+                            ctx.font = isMobile() ? '24px Arial' : '32px Arial';
+                            ctx.fillText('🎉 ALL PLANETS CONQUERED! 🎉', canvas.width/2, canvas.height/2 + 70);
+                            
+                            ctx.fillStyle = '#00ff88';
+                            ctx.font = isMobile() ? '16px Arial' : '20px Arial';
+                            ctx.fillText('🏠 HOME: Return to Mission Control', canvas.width/2, canvas.height/2 + 110);
+                            ctx.fillText('🔄 RESTART: Replay Eris for Ultimate Glory', canvas.width/2, canvas.height/2 + 135);
+                        }
+                    } else {
+                        // Custom level completion
+                        ctx.fillStyle = '#e94560';
+                        ctx.font = isMobile() ? '16px Arial' : '20px Arial';
+                        ctx.fillText('🎨 Custom Level Mastered!', canvas.width/2, canvas.height/2 - 20);
+                        
+                        ctx.fillStyle = '#00ff88';
+                        ctx.font = isMobile() ? '18px Arial' : '24px Arial';
+                        ctx.fillText('🔄 RESTART: Try Again', canvas.width/2, canvas.height/2 + 80);
+                        ctx.fillText('🏠 HOME: Back to Custom Levels', canvas.width/2, canvas.height/2 + 110);
+                    }
+                } else {
+                    var collectedStars = 0;
+                    var totalStars = 0;
+                    if (level.goldStars) {
+                        totalStars = level.goldStars.length;
+                        for (var i = 0; i < level.goldStars.length; i++) {
+                            if (level.goldStars[i].collected) collectedStars++;
+                        }
+                    }
+                    
+                    ctx.fillStyle = '#ff4444';
+                    ctx.font = isMobile() ? '32px Arial' : '48px Arial';
+                    var defeatText = currentLevelSet === 'custom' ? ' STUMPED YOU!' : ' DEFEATED YOU!';
+                    ctx.fillText(level.emoji + ' ' + level.name.toUpperCase() + defeatText, canvas.width/2, canvas.height/2 - 100);
+                    
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = isMobile() ? '18px Arial' : '24px Arial';
+                    ctx.fillText('This Attempt - Jumps: ' + stats.jumps + ', Deaths: ' + stats.deaths, canvas.width/2, canvas.height/2 - 50);
+                    ctx.fillText('⭐ Stars Collected: ' + collectedStars + '/' + totalStars, canvas.width/2, canvas.height/2 - 20);
+                    
+                    if (currentLevelSet === 'main') {
+                        ctx.fillStyle = '#cccccc';
+                        ctx.font = isMobile() ? '16px Arial' : '20px Arial';
+                        ctx.fillText('Total Career Deaths: ' + persistentStats.totalDeaths + ' | Planets Conquered: ' + persistentStats.totalCompletions, canvas.width/2, canvas.height/2 + 10);
+                        
+                        if (persistentStats.levelBestTimes[currentLevel]) {
+                            ctx.fillStyle = '#ffd700';
+                            ctx.fillText('Your Best Time on ' + level.name + ': ' + persistentStats.levelBestTimes[currentLevel].toFixed(1) + 's', canvas.width/2, canvas.height/2 + 40);
+                        }
+                    }
+                    
+                    ctx.fillStyle = '#00ff88';
+                    ctx.font = isMobile() ? '18px Arial' : '24px Arial';
+                    ctx.fillText('🔄 RESTART: Try Again', canvas.width/2, canvas.height/2 + 80);
+                    var homeText = currentLevelSet === 'custom' ? '🏠 HOME: Back to Custom Levels' : '🏠 HOME: Return to Mission Control';
+                    ctx.fillText(homeText, canvas.width/2, canvas.height/2 + 110);
+                    
+                    ctx.fillStyle = '#cccccc';
+                    ctx.font = isMobile() ? '12px Arial' : '16px Arial';
+                    ctx.fillText('Use the buttons above ↗️', canvas.width/2, canvas.height/2 + 140);
+                }
+            }
+            
+            // Draw live stats during gameplay (mobile optimized)
+            if (gameRunning) {
+                var distance = Math.floor(player.x / 10);
+                var currentTime = (Date.now() - stats.startTime) / 1000;
+                var progress = Math.min(100, (player.x / level.length) * 100);
+                var collectedStars = 0;
+                var totalStars = 0;
+                if (level.goldStars) {
+                    totalStars = level.goldStars.length;
+                    for (var i = 0; i < level.goldStars.length; i++) {
+                        if (level.goldStars[i].collected) collectedStars++;
+                    }
+                }
+                
+                ctx.fillStyle = '#ffffff';
+                ctx.font = isMobile() ? '14px Arial' : '16px Arial';
+                ctx.textAlign = 'left';
+                var levelPrefix = currentLevelSet === 'custom' ? '🎨 ' : '';
+                ctx.fillStyle = currentLevelSet === 'custom' ? '#e94560' : '#ffffff';
+                ctx.fillText(levelPrefix + level.emoji + ' ' + level.name, 10, 30);
+                ctx.fillStyle = '#ffffff';
+                ctx.fillText('Progress: ' + progress.toFixed(1) + '%', 10, 50);
+                ctx.fillText('⭐ ' + collectedStars + '/' + totalStars, 10, 70);
+                ctx.fillText('Time: ' + currentTime.toFixed(1) + 's', 10, canvas.height - 120);
+                ctx.fillText('Jumps: ' + stats.jumps, 10, canvas.height - 100);
+                ctx.fillText('Deaths: ' + stats.deaths, 10, canvas.height - 80);
+                
+                if (player.onSlope) {
+                    var slopeType = player.slopeAngle > 0 ? 'Uphill' : 'Downhill';
+                    var speedText = player.slopeAngle > 0 ? '(Slower)' : '(Faster)';
+                    ctx.fillStyle = player.slopeAngle > 0 ? '#00ff88' : '#ff8800';
+                    ctx.fillText(slopeType + ': ' + Math.abs(player.slopeAngle) + '° ' + speedText, 10, canvas.height - 40);
+                }
+                
+                var bridgesUnlocked = 0;
+                var totalBridges = 0;
+                if (level.bridges) {
+                    totalBridges = level.bridges.length;
+                    for (var i = 0; i < level.bridges.length; i++) {
+                        if (level.bridges[i].unlocked) bridgesUnlocked++;
+                    }
+                }
+                if (totalBridges > 0) {
+                    ctx.fillStyle = bridgesUnlocked === totalBridges ? '#00ff88' : '#ffaa00';
+                    ctx.fillText('🌉 Bridges: ' + bridgesUnlocked + '/' + totalBridges, 150, 70);
+                }
+                
+                if (player.y < -50) {
+                    ctx.fillStyle = '#ff4444';
+                    ctx.fillText('TOO HIGH! Forced Down', 10, canvas.height - 20);
+                } else if (player.doubleJumpAvailable) {
+                    ctx.fillStyle = '#00ff88';
+                    ctx.fillText('Double Jump Ready!', 10, canvas.height - 20);
+                } else if (!player.onGround) {
+                    ctx.fillStyle = '#666666';
+                    ctx.fillText('Double Jump Used', 10, canvas.height - 20);
+                }
+            }
+        }
+
+        function gameLoop() {
+            updatePlayer();
+            updateEffects();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Enhanced mobile controls
+        function initializeMobileControls() {
+            var jumpButton = document.getElementById('jumpButton');
+            
+            if (jumpButton) {
+                // Enhanced touch events with better feedback
+                jumpButton.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    jumpButton.classList.add('active');
+                    if (currentGameState === GameState.PLAYING && gameRunning) {
+                        handleJumpStart();
+                        // Haptic feedback on supported devices
+                        if (navigator.vibrate) {
+                            navigator.vibrate(50);
+                        }
+                    }
+                }, { passive: false });
+                
+                jumpButton.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    jumpButton.classList.remove('active');
+                    if (currentGameState === GameState.PLAYING) {
+                        handleJumpEnd();
+                    }
+                }, { passive: false });
+
+                // Prevent context menu on long press
+                jumpButton.addEventListener('contextmenu', function(e) {
+                    e.preventDefault();
+                });
+            }
+        }
+
+        // Enhanced canvas touch controls
+        function setupCanvasControls() {
+            canvas.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                if (currentGameState === GameState.PLAYING && gameRunning) {
+                    handleJumpStart();
+                    // Haptic feedback
+                    if (navigator.vibrate) {
+                        navigator.vibrate(30);
+                    }
+                } else if (currentGameState === GameState.PLAYING && gameWon && currentLevel < levels.length - 1) {
+                    startLevel(currentLevel + 1);
+                }
+            }, { passive: false });
+            
+            canvas.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                if (currentGameState === GameState.PLAYING) {
+                    handleJumpEnd();
+                }
+            }, { passive: false });
+
+            canvas.addEventListener('click', function(e) {
+                if (currentGameState === GameState.PLAYING && gameWon && currentLevel < levels.length - 1) {
+                    e.preventDefault();
+                    startLevel(currentLevel + 1);
+                }
+            });
+        }
+
+        // Keyboard controls (for desktop)
+        document.addEventListener('keydown', function(e) {
+            if (e.code === 'Space' && currentGameState === GameState.PLAYING) {
+                e.preventDefault();
+                handleJumpStart();
+            }
+        });
+
+        document.addEventListener('keyup', function(e) {
+            if (e.code === 'Space' && currentGameState === GameState.PLAYING) {
+                e.preventDefault();
+                handleJumpEnd();
+            }
+        });
+
+        // Enhanced responsive canvas with mobile optimization
+        function resizeCanvas() {
+            var containerWidth = window.innerWidth;
+            var containerHeight = window.innerHeight;
+            
+            var canvasWidth, canvasHeight;
+            
+            // Better mobile canvas sizing
+            if (isMobile()) {
+                if (window.orientation === 90 || window.orientation === -90) {
+                    // Landscape mode on mobile
+                    canvasWidth = containerWidth;
+                    canvasHeight = containerHeight;
+                    document.body.classList.add('landscape-mode');
+                } else {
+                    // Portrait mode on mobile
+                    canvasWidth = containerWidth;
+                    canvasHeight = Math.min(containerHeight * 0.6, containerWidth * 0.8);
+                    document.body.classList.remove('landscape-mode');
+                }
+            } else {
+                // Desktop sizing
+                canvasWidth = Math.min(1200, containerWidth - 20);
+                canvasHeight = Math.min(600, containerHeight * 0.8);
+                document.body.classList.remove('landscape-mode');
+            }
+            
+            canvas.style.width = canvasWidth + 'px';
+            canvas.style.height = canvasHeight + 'px';
+            
+            // Maintain canvas resolution for crisp graphics
+            var ratio = window.devicePixelRatio || 1;
+            canvas.width = canvasWidth * ratio;
+            canvas.height = canvasHeight * ratio;
+            ctx.scale(ratio, ratio);
+        }
+
+        // Initialize everything with PWA enhancements
+        window.addEventListener('load', function() {
+            loadPersistentStats();
+            
+            // Set up button event listeners
+            var startGameBtn = document.getElementById('startGameButton');
+            var restartBtn = document.getElementById('restartButton');
+            var homeBtn = document.getElementById('homeButton');
+            var changeNameBtn = document.getElementById('changeNameButton');
+            var customLevelsBtn = document.getElementById('customLevelsButton');
+            var backToMainBtn = document.getElementById('backToMainButton');
+            var profileBtn = document.getElementById('profileButton');
+            var backFromProfileBtn = document.getElementById('backFromProfileButton');
+            var resetDataBtn = document.getElementById('resetDataButton');
+            var nameInput = document.getElementById('playerNameInput');
+            
+            if (startGameBtn) {
+                startGameBtn.addEventListener('click', startGame);
+                startGameBtn.addEventListener('touchend', startGame);
+            }
+            
+            if (restartBtn) {
+                restartBtn.addEventListener('click', restartGame);
+                restartBtn.addEventListener('touchend', restartGame);
+            }
+            
+            if (homeBtn) {
+                homeBtn.addEventListener('click', function() {
+                    if (gameWon && currentLevelSet === 'main' && currentLevel < levels.length - 1) {
+                        startLevel(currentLevel + 1);
+                    } else {
+                        backToLevelSelect();
+                    }
+                });
+                homeBtn.addEventListener('touchend', function() {
+                    if (gameWon && currentLevelSet === 'main' && currentLevel < levels.length - 1) {
+                        startLevel(currentLevel + 1);
+                    } else {
+                        backToLevelSelect();
+                    }
+                });
+            }
+            
+            if (changeNameBtn) {
+                changeNameBtn.addEventListener('click', showNameInput);
+                changeNameBtn.addEventListener('touchend', showNameInput);
+            }
+            
+            if (customLevelsBtn) {
+                customLevelsBtn.addEventListener('click', showCustomSelect);
+                customLevelsBtn.addEventListener('touchend', showCustomSelect);
+            }
+            
+            if (backToMainBtn) {
+                backToMainBtn.addEventListener('click', showLevelSelect);
+                backToMainBtn.addEventListener('touchend', showLevelSelect);
+            }
+            
+            if (profileBtn) {
+                profileBtn.addEventListener('click', showProfile);
+                profileBtn.addEventListener('touchend', showProfile);
+            }
+            
+            if (backFromProfileBtn) {
+                backFromProfileBtn.addEventListener('click', showLevelSelect);
+                backFromProfileBtn.addEventListener('touchend', showLevelSelect);
+            }
+            
+            if (resetDataBtn) {
+                resetDataBtn.addEventListener('click', resetPlayerData);
+                resetDataBtn.addEventListener('touchend', resetPlayerData);
+            }
+            
+            if (nameInput) {
+                nameInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        startGame();
+                    }
+                });
+            }
+            
+            if (playerName) {
+                showLevelSelect();
+            }
+            
+            initializeMobileControls();
+            setupCanvasControls();
+            resizeCanvas();
+            gameLoop();
+            
+            // Hide splash screen after game loads
+            setTimeout(function() {
+                if (installPrompt.style.display !== 'none') {
+                    // Show install prompt for 10 seconds if not dismissed
+                    setTimeout(function() {
+                        installPrompt.style.display = 'none';
+                    }, 10000);
+                }
+            }, 2000);
+        });
+
+        // Enhanced responsive handling
+        window.addEventListener('resize', function() {
+            clearTimeout(window.resizeTimeout);
+            window.resizeTimeout = setTimeout(resizeCanvas, 100);
+        });
+        
+        window.addEventListener('orientationchange', function() {
+            setTimeout(function() {
+                resizeCanvas();
+                // Force canvas redraw after orientation change
+                if (currentGameState !== GameState.PLAYING) {
+                    draw();
+                }
+            }, 100);
+        });
+        
+        // Prevent zoom on mobile
+        document.addEventListener('gesturestart', function(e) {
+            e.preventDefault();
+        });
+        
+        document.addEventListener('gesturechange', function(e) {
+            e.preventDefault();
+        });
+        
+        document.addEventListener('gestureend', function(e) {
+            e.preventDefault();
+        });
+    </script>
+</body>
+</html>
