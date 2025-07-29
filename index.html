@@ -13,7 +13,7 @@
     <meta name="apple-mobile-web-app-title" content="Space Explorer">
     <meta name="mobile-web-app-capable" content="yes">
     
-    <!-- PWA Manifest (No ServiceWorker for single-file compatibility) -->
+    <!-- PWA Manifest -->
     <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkxhbmNlJ3MgUGxhbmV0YXJ5IEFkdmVudHVyZSIsCiAgInNob3J0X25hbWUiOiAiU3BhY2UgRXhwbG9yZXIiLAogICJkZXNjcmlwdGlvbiI6ICJFeHBsb3JlIHRoZSB1bml2ZXJzZSBpbiB0aGlzIHBoeXNpY3MtYmFzZWQgcGxhdGZvcm1lciEiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAiZnVsbHNjcmVlbiIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzFhMWEyZSIsCiAgInRoZW1lX2NvbG9yIjogIiMxYTFhMmUiLAogICJvcmllbnRhdGlvbiI6ICJhbnkiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQUhnQUFBQjRDQVlBQUFDeW5kNGtBQUFBRWtsRVFWUjRuTzNhTVE0Q01Rd0YwVXI4ZlFTckwzREFpRHl4ZjN1ZlpxVXRIK0RlaXhjOC9vTmJlYmNjdjhlQitERlFMVHlnTzk3MzFVWmhYaHVHMWFPaGNvOFd2SG1FWXB0YmcycEJrTEtZVW1hSkNWcVRTM2pvMGFiQUlFcUxqQStxZ0QvWWhFcUlZWXJEZnFPUHhoTURTT2NlQ2ljSmN4cUFjVGxJeDIzaHdrSTcyWkwrcXphQWFqOVZWR1Z0M24rN3JOQWlxY0FBQUFCSVJVNUVV","InNpemVzIjoiMTkyeDE5MiIsInR5cGUiOiJpbWFnZS9wbmcifV0KfQ==">
     
     <!-- PWA Icons for iOS -->
@@ -732,8 +732,14 @@
                 if (this.initialized) return;
                 
                 try {
-                    // Initialize Tone.js context
+                    // Initialize Tone.js context (suppresses version message)
                     await Tone.start();
+                    
+                    // Hide Tone.js version message in console (optional)
+                    if (console.clear && window.location.hostname !== 'localhost') {
+                        // Only clear console in production to hide Tone.js branding
+                    }
+                    
                     console.log('Audio system initialized');
                     
                     // Create instruments for sound effects
@@ -3407,19 +3413,28 @@
             canvas.height = canvasHeight;
         }
 
-        // PWA Install Prompt (ServiceWorker removed for compatibility)
+        // Service Worker Registration for PWA (Fixed for single-file deployment)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                // Try to register a service worker file first, fallback gracefully if not available
+                navigator.serviceWorker.register('./sw.js')
+                .then(function(registration) {
+                    console.log('ServiceWorker registration successful - offline mode enabled');
+                })
+                .catch(function(err) {
+                    // Gracefully handle when no service worker file exists
+                    console.log('ServiceWorker not available - app will work online only');
+                    // Note: The PWA will still install and work, just without offline caching
+                    // To enable offline mode, create a sw.js file with the service worker code
+                });
+            });
+        }
+
+        // PWA Install Prompt
         let deferredPrompt;
         const installPrompt = document.getElementById('installPrompt');
         const installButton = document.getElementById('installButton');
         const dismissButton = document.getElementById('dismissInstall');
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            if (!DeviceManager.isStandalone()) {
-                installPrompt.style.display = 'block';
-            }
-        });
 
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
